@@ -11,11 +11,11 @@ module.exports = {
       user_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: "User" }
+        references: { model: "Users" }
       },
       list_id: {
         type: Sequelize.INTEGER,
-        references: { model: "List" }
+        references: { model: "Lists" }
       },
       task: {
         allowNull: false,
