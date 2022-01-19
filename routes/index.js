@@ -104,36 +104,37 @@ router.post('/sign-up', csrfProtection, userValidators, asyncHandler(async (req,
 
 
 router.post('/log-in', csrfProtection, loginValidators, asyncHandler(async (req, res) => {
-    const { email, password } = req.body;
-    let errors = [];
-    const validatorErrors = validationResult(req);
-    if (!validatorErrors.isEmpty()) {
-      // Attempt to get the user by their email address.
-      const user = await db.User.findOne({ where: { email } });
+  const { email, password } = req.body;
+  let errors = [];
+  const validatorErrors = validationResult(req);
+  if (!validatorErrors.isEmpty()) {
+    // Attempt to get the user by their email address.
+    const user = await db.User.findOne({ where: { email } });
 
-      if (user !== null) {
-        const passwordMatch = await bcrypt.compare(password, user.password.toString());
-        if (passwordMatch) {
-          // TODO Login the user function.
-          return res.redirect('/');
-        }
+    if (user !== null) {
+      const passwordMatch = await bcrypt.compare(password, user.password.toString());
+      if (passwordMatch) {
+        // TODO Login the user function.
+        return res.redirect('/');
       }
-      // Otherwise display an error message to the user.
-      errors.push('Login failed');
-    } else {
-      errors = validatorErrors.array().map((error) => error.msg);
     }
+    // Otherwise display an error message to the user.
+    errors.push('Login failed');
+  } else {
+    errors = validatorErrors.array().map((error) => error.msg);
+  }
 
-    res.render('log-in', {
-      title: 'Login',
-      email,
-      errors,
-      csrfToken: req.csrfToken(),
-    });
-  }));
+  res.render('log-in', {
+    title: 'Login',
+    email,
+    errors,
+    csrfToken: req.csrfToken(),
+  });
+}));
 
 
 
 
 
 module.exports = router;
+
