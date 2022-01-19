@@ -68,8 +68,8 @@ const userValidators = [
 ];
 
 /* GET home page. */
-router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Welcome to Remember the Bread' });
+router.get('/', (req, res) => {
+  res.render('index');
 });
 
 router.get('/log-in', csrfProtection, (req, res) => {
