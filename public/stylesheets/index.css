@@ -1,7 +1,116 @@
-h1 {
-    color: red;
+* {
+    background-color: rgb(2, 142, 241);
+    color: white;
+    font-family: "Nunito";
+    font-size: 16px;
 }
 
-.main-nav{
-    background-color: saddlebrown;
+.nav-bar-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 45px;
+    border-bottom: solid rgba(0, 0, 0, 0.048) 1px;;
+}
+
+.bread-pic {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: fit-content;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+}
+
+.buttons li {
+    display:inline-block;
+    margin: 0 25px;
+}
+
+.sign-button {
+    border: solid white 2px;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+
+}
+
+.buttons a {
+    text-decoration: none;
+}
+
+.large-sign-up {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+
+.big-button {
+    border: solid rgba(218, 67, 7, 0.925) 1px;
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: rgba(218, 67, 7, 0.925);
+    border-radius: 5px;
+}
+
+.big-button a {
+    font-size: 22px;
+    text-decoration: none;
+}
+
+.intro-sentence {
+    display: flex;
+    justify-content: center;
+    margin-top:70px;
+}
+
+h1 {
+    font-size: 45px;
+    font-family: "Nunito"
+}
+
+.picture {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+
+}
+
+.picture img {
+    width: 350px;
+    height: 300px
+}
+
+.picture-quotes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 70px;
+}
+
+.picture-quotes span {
+    font-size: 20px;
+}
+
+.quotes#man-quote {
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#woman-quote::before {
+    background-image: url(https://www.rememberthemilk.com/img/hp_face_2@2x.png?1587967172);
+}
+
+#woman-quote {
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    padding: 10px;
+    margin-right: 60px;
 }

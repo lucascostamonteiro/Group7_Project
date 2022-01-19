@@ -4,10 +4,27 @@ html
       block head
         title="Express Starter App"
         link(rel='stylesheet' href='/stylesheets/reset.css')
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito")
   body
-      div(class="main-div")
-        ul
-          li: a(class="nav-title" href="/") Remember the Bread
-          li: a(class="login-button" href="/log-in") Login
-          li: a(class="login-button" href="/sign-up") Sign-Up
+      div(class='nav-bar-div')
+        div(class='bread-pic')
+          a(class="nav-title" href="/") Remember the Bread
+        div(class="button-div")
+          ul(class='buttons')
+            li: a(class="login-button" href="/log-in") Log in
+            li: a(class="sign-button" href="/sign-up") Sign up for free
+      div(class='intro-sentence')
+        h1 The smart to-do app for busy people.
+      div(class="large-sign-up")
+        div(class='big-button')
+          a(href='/sign-up') Sign Up Free
+      div(class='picture-quotes')
+        div(class = 'quotes', id='man-quote')
+          span Pick up the bread tomorrow.
+        div(class = 'quotes', id='woman-quote')
+          //- img(src='https://www.rememberthemilk.com/img/hp_face_2@2x.png?1587967172')
+          span Call Bob Thursday.
+      div(class='picture')
+        img(src='https://www.rememberthemilk.com/img/hp_steve_3@2x.png?1587967172')
+
 block content
