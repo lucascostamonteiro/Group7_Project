@@ -75,8 +75,7 @@ router.get('/log-in', csrfProtection, (req, res) => {
 });
 
 router.get('/sign-up', csrfProtection, (req, res) => {
-  const user = db.User.build();
-  res.render('sign-up', { title: 'Sign Up!', user, csrfToken: req.csrfToken() });
+  res.render('sign-up', { title: 'Sign Up!', errors: [], csrfToken: req.csrfToken() });
 });
 
 router.post('/sign-up', csrfProtection, userValidators, asyncHandler(async (req, res) => {
@@ -87,7 +86,7 @@ router.post('/sign-up', csrfProtection, userValidators, asyncHandler(async (req,
     email
   })
   const validatorErrors = validationResult(req);
-  if (!validatorErrors.isEmpty()) {
+  if (validatorErrors.isEmpty()) {
     const hashedPassword = await bcrypt.hash(password, 10);
     user.password = hashedPassword;
     await user.save();
