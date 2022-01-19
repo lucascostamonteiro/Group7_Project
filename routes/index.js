@@ -30,7 +30,7 @@ const userValidators = [
     .withMessage('Please provide a value for Last Name')
     .isLength({ max: 50 })
     .withMessage('Last Name must not be more than 50 characters long'),
-  check('emailAddress')
+  check('email')
     .exists({ checkFalsy: true })
     .withMessage('Please provide a value for Email Address')
     .isLength({ max: 255 })
@@ -38,7 +38,7 @@ const userValidators = [
     .isEmail()
     .withMessage('Email Address is not a valid email')
     .custom((value) => {
-      return db.User.findOne({ where: { emailAddress: value } })
+      return db.User.findOne({ where: { email: value } })
         .then((user) => {
           if (user) {
             return Promise.reject('The provided Email Address is already in use by another account');
@@ -104,7 +104,7 @@ router.post('/sign-up', csrfProtection, userValidators, asyncHandler(async (req,
 
 
 router.post('/log-in', csrfProtection, loginValidators, asyncHandler(async (req, res) => {
-    const { emailAddress, password } = req.body;
+    const { email, password } = req.body;
     let errors = [];
     const validatorErrors = validationResult(req);
     if (!validatorErrors.isEmpty()) {
@@ -126,7 +126,7 @@ router.post('/log-in', csrfProtection, loginValidators, asyncHandler(async (req,
 
     res.render('log-in', {
       title: 'Login',
-      emailAddress,
+      email,
       errors,
       csrfToken: req.csrfToken(),
     });
