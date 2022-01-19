@@ -2,7 +2,7 @@ doctype html
 html
   head
       block head
-        title="Express Starter App"
+        title="Welcome to Remember the Bread"
         link(rel='stylesheet' href='/stylesheets/reset.css')
         link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito")
   body
@@ -13,6 +13,8 @@ html
           ul(class='buttons')
             li: a(class="login-button" href="/log-in") Log in
             li: a(class="sign-button" href="/sign-up") Sign up for free
+            if locals.authenticated
+              li: a(href="/log-out") Logout
       div(class='intro-sentence')
         h1 The smart to-do app for busy people.
       div(class="large-sign-up")
