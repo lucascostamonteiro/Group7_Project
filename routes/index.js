@@ -146,6 +146,11 @@ router.get('/log-out', (req, res) => {
 })
 
 
+router.get('/demo', (req, res) => {
+  res.render('layout', {
+    title: 'Welcome Demo User'
+  })
+});
 
 
 module.exports = router;

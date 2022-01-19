@@ -2,14 +2,14 @@ doctype html
 html
   head
       block head
-        title="Express Starter App"
+        title="Welcome to Remember the Bread"
         link(rel='stylesheet' href='/stylesheets/reset.css')
   body
       div(class="main-div")
         ul
           li: a(class="nav-title" href="/") Remember the Bread
           li: a(class="login-button" href="/log-in") Login
-          li: a(class="login-button" href="/sign-up") Sign-Up
+          li: a(class="sign-up-button" href="/sign-up") Sign-Up
           if locals.authenticated
             li: a(href="/log-out") Logout
 block content
