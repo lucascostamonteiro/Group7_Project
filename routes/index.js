@@ -92,7 +92,7 @@ router.post('/sign-up', csrfProtection, userValidators, asyncHandler(async (req,
     const hashedPassword = await bcrypt.hash(password, 10);
     user.password = hashedPassword;
     await user.save();
-    res.redirect('/');
+    res.redirect(`/${user.id}`);
   } else {
     const errors = validatorErrors.array().map((error) => error.msg);
     res.render('sign-up', {
@@ -121,7 +121,7 @@ router.post('/log-in', csrfProtection, loginValidators, asyncHandler(async (req,
 
         req.session.user = { userId: user.id, email: user.email }
 
-        return res.redirect('/');
+        return res.redirect(`/${user.id}`);
       }
     }
     // Otherwise display an error message to the user.
@@ -144,7 +144,6 @@ router.get('/log-out', (req, res) => {
       res.redirect('/')
   })
 })
-
 
 router.get('/demo', (req, res) => {
   res.render('layout', {
