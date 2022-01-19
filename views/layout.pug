@@ -10,10 +10,10 @@ html
           a(class="nav-title" href="/") Remember the Bread
         div(class="button-div")
           ul(class='buttons')
-          if !locals.authenticated
-            li: a(class="login-button" href="/log-in") Log in
-            li: a(class="sign-button" href="/sign-up") Sign up for free
-          if locals.authenticated
-            li: a(href="/log-out") Logout
+            if !locals.authenticated
+              li: a(class="login-button" href="/log-in") Log in
+              li: a(class="sign-button" href="/sign-up") Sign up for free
+            if locals.authenticated
+              li: a(href="/log-out") Logout
 
 block content
