@@ -5,4 +5,9 @@ html
         title="Express Starter App"
         link(rel='stylesheet' href='/stylesheets/reset.css')
   body
-    block content
+      div(class="main-div")
+        ul
+          li: a(class="nav-title" href="/") Remember the Bread
+          li: a(class="login-button" href="/log-in") Login
+          li: a(class="login-button" href="/sign-up") Sign-Up
+block content
