@@ -34,11 +34,14 @@ app.use(
   })
 );
 
-app.use(restoreUser)
+app.use(restoreUser);
 
 // create Session table if it doesn't already exist
 store.sync();
 
+app.use((req, res, next) => {
+  next();
+})
 app.use('/:userId(\\d+)', usersRouter);
 app.use('/', indexRouter);
 
