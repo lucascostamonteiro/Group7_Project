@@ -71,7 +71,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/log-in', csrfProtection, (req, res) => {
-  res.render('log-in', { title: 'Log In!', csrfToken: req.csrfToken() });
+  res.render('log-in', { title: 'Log In!', errors: [], csrfToken: req.csrfToken() });
 });
 
 router.get('/sign-up', csrfProtection, (req, res) => {
