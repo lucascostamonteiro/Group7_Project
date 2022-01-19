@@ -1,6 +1,5 @@
 const express = require('express');
 const csurf = require('csurf');
-const cookieParser = require('cookie-parser');
 const db = require('../db/models');
 const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
@@ -9,8 +8,6 @@ const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).ca
 const csrfProtection = csurf({ cookie: true });
 
 const router = express.Router();
-
-router.use(express.urlencoded({ extended: false }));
 
 
 const loginValidators = [
@@ -39,7 +36,15 @@ const userValidators = [
     .isLength({ max: 255 })
     .withMessage('Email Address must not be more than 255 characters long')
     .isEmail()
-    .withMessage('Email Address is not a valid email'),
+    .withMessage('Email Address is not a valid email')
+    .custom((value) => {
+      return db.User.findOne({ where: { emailAddress: value } })
+        .then((user) => {
+          if (user) {
+            return Promise.reject('The provided Email Address is already in use by another account');
+          }
+        });
+    }),
   check('password')
     .exists({ checkFalsy: true })
     .withMessage('Please provide a value for Password')
@@ -70,7 +75,8 @@ router.get('/log-in', csrfProtection, (req, res) => {
 });
 
 router.get('/sign-up', csrfProtection, (req, res) => {
-  res.render('sign-up', { title: 'Sign Up!', csrfToken: req.csrfToken() });
+  const user = db.User.build();
+  res.render('sign-up', { title: 'Sign Up!', user, csrfToken: req.csrfToken() });
 });
 
 router.post('/sign-up', csrfProtection, userValidators, asyncHandler(async (req, res) => {
@@ -98,18 +104,34 @@ router.post('/sign-up', csrfProtection, userValidators, asyncHandler(async (req,
 }));
 
 
-// router.post('/log-in', csrfProtection, loginValidators, asyncHandler(async (req, res) => {
-//   const { email, password } = req.body;
-//   let errors = [];
-//   const validatorErrors = validationResult(req);
-//   const user = await db.User.findOne({ where: { email } });
-//   if (user !== null) {
-//     const passwordMatch = await bcrypt.compare(password, user.hashedPassword.toString())
-//     if (passwordMatch) return res.redirect('/users');
-//   }
-// }));
+router.post('/log-in', csrfProtection, loginValidators, asyncHandler(async (req, res) => {
+    const { emailAddress, password } = req.body;
+    let errors = [];
+    const validatorErrors = validationResult(req);
+    if (!validatorErrors.isEmpty()) {
+      // Attempt to get the user by their email address.
+      const user = await db.User.findOne({ where: { email } });
 
+      if (user !== null) {
+        const passwordMatch = await bcrypt.compare(password, user.password.toString());
+        if (passwordMatch) {
+          // TODO Login the user function.
+          return res.redirect('/');
+        }
+      }
+      // Otherwise display an error message to the user.
+      errors.push('Login failed');
+    } else {
+      errors = validatorErrors.array().map((error) => error.msg);
+    }
 
+    res.render('log-in', {
+      title: 'Login',
+      emailAddress,
+      errors,
+      csrfToken: req.csrfToken(),
+    });
+  }));
 
 
 

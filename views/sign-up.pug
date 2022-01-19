@@ -1,12 +1,12 @@
 extends layout.pug
 
 block content
-    if errors.length > 0
-        div(class='alert alert-danger' role='alert')
-            p The following error(s) occurred:
-            ul
-                each error in errors
-                    li= error
+  if errors
+    div(class='errors-div' role='alert')
+      p The following error(s) occurred:
+      ul
+        each error in errors
+          li= error
     form(action="/sign-up" method="post")
         input(type="hidden" name="_csrf" value=csrfToken)
         label(for="firstName") First Name
