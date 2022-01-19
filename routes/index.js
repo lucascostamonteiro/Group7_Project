@@ -13,7 +13,9 @@ const router = express.Router();
 const loginValidators = [
   check('email')
     .exists({ checkFalsy: true })
-    .withMessage('Please provide an email address'),
+    .withMessage('Please provide an email address')
+    .isEmail()
+    .withMessage('Email Address is not a valid email'),
   check('password')
     .exists({ checkFalsy: true })
     .withMessage('Please provide a password')
@@ -107,14 +109,18 @@ router.post('/log-in', csrfProtection, loginValidators, asyncHandler(async (req,
   const { email, password } = req.body;
   let errors = [];
   const validatorErrors = validationResult(req);
-  if (!validatorErrors.isEmpty()) {
+
+  if (validatorErrors.isEmpty()) {
     // Attempt to get the user by their email address.
     const user = await db.User.findOne({ where: { email } });
 
     if (user !== null) {
+
       const passwordMatch = await bcrypt.compare(password, user.password.toString());
       if (passwordMatch) {
-        // TODO Login the user function.
+
+        req.session.user = { userId: user.id, email: user.email }
+
         return res.redirect('/');
       }
     }
@@ -132,9 +138,14 @@ router.post('/log-in', csrfProtection, loginValidators, asyncHandler(async (req,
   });
 }));
 
+router.get('/log-out', (req, res) => {
+  delete req.session.user;
+  req.session.save(() => {
+      res.redirect('/')
+  })
+})
 
 
 
 
 module.exports = router;
-
