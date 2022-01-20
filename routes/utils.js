@@ -1,5 +1,8 @@
 const { User } = require('../db/models');
 
+const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
+
+
 const restoreUser = async (req, res, next) => {
     // console.log(req.session);
 
@@ -25,5 +28,6 @@ const restoreUser = async (req, res, next) => {
 };
 
 module.exports = {
-    restoreUser
+    restoreUser,
+    asyncHandler
 };
