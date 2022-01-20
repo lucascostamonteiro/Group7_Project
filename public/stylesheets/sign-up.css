@@ -1,0 +1,105 @@
+.nav-bar-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 45px;
+    border-bottom: solid rgba(0, 0, 0, 0.048) 1px;;
+}
+
+.bread-pic {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: fit-content;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+}
+
+.buttons li {
+    display:inline-block;
+    margin: 0 25px;
+}
+
+.sign-button {
+    border: solid white 2px;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+
+}
+
+.buttons a {
+    text-decoration: none;
+}
+
+.right-side {
+    display: flex;
+    flex-direction: column;
+    float: right;
+    width: 50%;
+    margin-top: 80px;
+}
+
+.sign-up-sentence {
+    padding: 25px;
+
+}
+
+.form-div {
+    padding: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    justify-content: center;
+}
+
+form input {
+    padding: 10px;
+    font-size: 22px;
+    color:rgba(0, 0, 0, 0.356);
+    margin-bottom: 10px;
+    width: 65%;
+    border: solid rgba(0, 0, 0, 0.363) 1px;
+    border-radius: 5px;
+}
+
+form button {
+    width: 65%;
+    background-color:#009DFF;
+    border: solid #009DFF 1px;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Nunito';
+    border-radius: 5px;
+}
+
+form a {
+    margin-top: 10px;
+    width: 65%;
+    border: solid #3292f2 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Nunito';
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.left-side {
+    display: flex;
+    flex-direction: column;
+    float: left;
+    width: 50%;
+    margin-top: 80px;
+    background-color: #0060BF;
+}
