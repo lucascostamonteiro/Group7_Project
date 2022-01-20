@@ -1,30 +1,46 @@
-extends layout.pug
-
-append head
+doctype html
+html
+  head
     link(rel="stylesheet" href="stylesheets/sign-up.css")
     link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito")
     script(src="/javascripts/sign-up.js" type="module" defer)
-
-block content
+  body
     div(class='right-side')
-        div(class='sign-up-sentence') Sign up for free.
+      div(class="form-div")
+        ul(class='buttons')
+          if !locals.authenticated
+            li: a(class="login-button" href="/log-in") Log in
+          if locals.authenticated
+            li: a(href="/log-out") Logout
+      div(class="actual-form-div")
         if (errors.length > 0)
-            div(class='' role='alert')
-                p The following error(s) occurred:
-                ul
-                    each error in errors
-                        li= error
-        div(class="form-div")
-            form(action="/sign-up" method="post")
-                input(type="hidden" name="_csrf" value=csrfToken)
-                input(type="text" name="firstName" value='First Name')
-                input(type="text" name="lastName" value='Last Name')
-                input(type="text" name="email" value="Email")
-                input(type="text" name="password" value='Password')
-                input(type="text" name="confirmPassword" value='Confirm Password')
-                button(type="submit") Sign-Up!
+          div(class='' role='alert')
+            p The following error(s) occurred:
+              ul
+                each error in errors
+                  li= error
+        form(action="/sign-up" method="post")
+          div(class='sign-up-sentence') Sign up for free.
+          input(type="hidden" name="_csrf" value=csrfToken)
+          input(type="text" name="firstName" value='First Name')
+          input(type="text" name="lastName" value='Last Name')
+          input(type="text" name="email" value="Email")
+          input(type="text" name="password" value='Password')
+          input(type="text" name="confirmPassword" value='Confirm Password')
+          button(type="submit") Sign-Up!
 
-                a(class="demo-user-button" href="/demo") Demo User
+          a(class="demo-user-button" href="/demo") Demo User
 
     main(class='left-side')
-        div Join millions of people getting organized and productive!
+      div(class='bread-pic')
+        a(class="bread-anchor" href="/"): img(class="bread-image" src="https://icons-for-free.com/iconfiles/png/512/bread+bread+loaf+food+toast+icon-1320168012160404253.png")
+        a(class="nav-title" href="/") Remember the Bread
+      div(class="quote")
+        div(class="people-images")
+          div(class="person-1")
+            img(src="https://www.rememberthemilk.com/img/hp_person3.png?1587967172")
+          div(class="person-2")
+            img(src="https://www.rememberthemilk.com/img/hp_person2.png?1587967172")
+          div(class="person-3")
+            img(src="https://www.rememberthemilk.com/img/hp_person4.png?1587967172")
+        h1 Join millions of people getting organized and productive!

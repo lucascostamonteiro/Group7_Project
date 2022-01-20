@@ -1,0 +1,177 @@
+ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+}
+
+.buttons li {
+  display:inline-block;
+  margin: 0 25px;
+}
+
+.sign-button {
+  border: solid white 2px;
+  padding: 5px 10px 5px 10px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.buttons a {
+  text-decoration: none;
+}
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+  float: right;
+  width: 50%;
+  margin-top: 20px;
+}
+
+.sign-up-sentence {
+  padding: 25px;
+
+}
+
+.form-div {
+  padding: 10px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  width: 50%;
+}
+
+form {
+  margin-top: 110px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  justify-content: center;
+  width: 50%;
+}
+
+form input {
+  padding: 10px;
+  font-size: 22px;
+  color:rgba(0, 0, 0, 0.356);
+  margin-bottom: 10px;
+  border: solid rgba(0, 0, 0, 0.363) 1px;
+  border-radius: 5px;
+}
+
+form button {
+  background-color:#009DFF;
+  border: solid #009DFF 1px;
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 20px;
+  text-align: center;
+  font-family: 'Nunito';
+  border-radius: 5px;
+}
+
+.login-sentence {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+form a {
+  margin-top: 10px;
+  width: 65%;
+  border: solid #3292f2 2px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 20px;
+  text-align: center;
+  font-family: 'Nunito';
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.left-side {
+  display: flex;
+  flex-direction: column;
+  float: left;
+  width: 50%;
+  margin-top: 20px;
+  background-color: #0060BF;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(
+    to right,
+    #0060BF 0%,
+    #0060BF 50%,
+    white 50%,
+    white 100%
+  );
+}
+
+.quote {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 250px
+}
+
+h1, h2 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: white;
+}
+
+.bread-pic {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  margin-left: 28%;
+}
+
+.monkey-div {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: row;
+}
+
+.monkey {
+  height: 60px;
+  width: 60px;
+  border: 2px solid white;
+  border-radius: 30px;
+}
+
+.monkey-quote {
+  margin-left: 15px;
+  margin-right: 20px;
+  opacity: .6;
+  color: white;
+}
+
+.faded-quote {
+  opacity: .6;
+}
+
+.bread-image {
+  height: 70px;
+  width: 70px;
+}
+
+.nav-title {
+  text-decoration: none;
+  color: white;
+  font-family: "Nunito";
+  font-weight: bold;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  margin-left: 5px;
+}
+
+main {
+  position:fixed;
+	top:0;
+	left:0;
+}
