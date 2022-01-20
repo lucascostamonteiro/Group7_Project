@@ -21,7 +21,9 @@ block content
     div(class='modal-content')
       span(class='close-button')
       p Please enter a new list name:
-      input(type='text' class='list-input', placeHolder='List Name')
-      div(class='modal-buttons')
-        button(type='submit' class='submit-list') Add List
-        button(class='cancel-button') Cancel
+      form(action=`/lists` method='post')
+        input(type='hidden' name='_csrf' value=csrfToken)
+        input(type='text' class='list-input', placeHolder='List Name')
+        div(class='modal-buttons')
+          button(type='submit' class='submit-list') Add List
+          button(class='cancel-button') Cancel
