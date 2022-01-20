@@ -1,6 +1,5 @@
 const express = require('express');
 const session = require('express-session');
-const router = express.Router();
 const db = require('../db/models');
 const { asyncHandler } = require('../routes/utils');
 const csurf = require('csurf');
@@ -11,16 +10,22 @@ const csrfProtection = csurf({ cookie: true });
 
 const router = express.Router();
 
-router.post('/lists', csrfProtection, asyncHandler(async (req, res) => {
+router.post('/', asyncHandler(async (req, res, next) => {
     const user = await req.session.user;
-    const {
-        name,
-        user
-    } = req.body;
-
-
-
-
-    console.log('HELLLOOOOOO', user)
-    res.send('hellooooo')
+    const { name, input } = req.body;
+    const list =
+    console.log('HELLLOOOOOO', user, req.body)
+    res.json({ message: 'Success' })
+    // res.redirect(`/${user.userId}`, { user })
 }))
+
+
+
+
+
+
+
+
+
+
+module.exports = router;
