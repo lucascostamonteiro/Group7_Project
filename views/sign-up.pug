@@ -1,24 +1,30 @@
 extends layout.pug
 
-block content
-    if (errors.length > 0)
-        div(class='' role='alert')
-            p The following error(s) occurred:
-            ul
-                each error in errors
-                    li= error
-    form(action="/sign-up" method="post")
-        input(type="hidden" name="_csrf" value=csrfToken)
-        label(for="firstName") First Name
-        input(type="text" name="firstName")
-        label(for="lastName") Last Name
-        input(type="text" name="lastName")
-        label(for="email") Email
-        input(type="text" name="email")
-        label(for="password") Password
-        input(type="password" name="password")
-        label(for="confirmPassword") Confirm Password
-        input(type="password" name="confirmPassword")
-        button(type="submit") Sign-Up
+append head
+    link(rel="stylesheet" href="stylesheets/sign-up.css")
+    link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito")
+    script(src="/javascripts/sign-up.js" type="module" defer)
 
-        a(class="demo-user-button" href="/demo") Demo User
+block content
+    div(class='right-side')
+        div(class='sign-up-sentence') Sign up for free.
+        if (errors.length > 0)
+            div(class='' role='alert')
+                p The following error(s) occurred:
+                ul
+                    each error in errors
+                        li= error
+        div(class="form-div")
+            form(action="/sign-up" method="post")
+                input(type="hidden" name="_csrf" value=csrfToken)
+                input(type="text" name="firstName" value='First Name')
+                input(type="text" name="lastName" value='Last Name')
+                input(type="text" name="email" value="Email")
+                input(type="text" name="password" value='Password')
+                input(type="text" name="confirmPassword" value='Confirm Password')
+                button(type="submit") Sign-Up!
+
+                a(class="demo-user-button" href="/demo") Demo User
+
+    main(class='left-side')
+        div Join millions of people getting organized and productive!
