@@ -13,6 +13,7 @@ html
           ul(class='buttons')
             if !locals.authenticated
               li: a(class="login-button" href="/log-in") Log in
+              li: a(class="demo-user-button" href="/demo") Demo User
               li: a(class="sign-button" href="/sign-up") Sign up for free
             if locals.authenticated
               li: a(href="/log-out") Logout

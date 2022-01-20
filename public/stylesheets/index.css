@@ -49,16 +49,16 @@ ul {
 }
 
 .big-button {
-    border: solid rgba(218, 67, 7, 0.925) 1px;
+    border: solid rgb(218, 67, 7) 1px;
     padding: 10px;
     padding-left: 30px;
     padding-right: 30px;
-    background-color: rgba(218, 67, 7, 0.925);
+    background-color: rgb(218, 67, 7);
     border-radius: 5px;
 }
 
 .big-button a {
-    background-color: rgba(218, 67, 7, 0.925);
+    background-color: rgb(218, 67, 7);
     font-size: 22px;
     text-decoration: none;
 }

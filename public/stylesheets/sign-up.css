@@ -221,6 +221,10 @@ main {
 }
 
 .people-images {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
+    float: left;
+    width: 50%;
+    margin-top: 80px;
+    background: #0060BF;
 }
