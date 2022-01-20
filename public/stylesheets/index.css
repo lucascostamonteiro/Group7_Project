@@ -152,3 +152,19 @@ h1 {
     width: 35px;
     margin: 0 10px 0 0;
 }
+
+.nav-title {
+    text-decoration: none;
+    color: white;
+    font-family: "Nunito";
+    font-weight: bold;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.bread-image {
+    height: 70px;
+    width: 70px;
+}

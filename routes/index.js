@@ -95,6 +95,7 @@ router.post('/sign-up', csrfProtection, userValidators, asyncHandler(async (req,
     res.redirect(`/${user.id}`);
   } else {
     const errors = validatorErrors.array().map((error) => error.msg);
+    // console.log('DEBUG:', errors);
     res.render('sign-up', {
       title: 'Sign-Up',
       user,
@@ -116,13 +117,13 @@ router.post('/log-in', csrfProtection, loginValidators, asyncHandler(async (req,
 
     if (user !== null) {
 
-      // const passwordMatch = await bcrypt.compare(password, user.password.toString());
-      // if (passwordMatch) {
+      const passwordMatch = await bcrypt.compare(password, user.password.toString());
+      if (passwordMatch) {
 
         req.session.user = { userId: user.id, email: user.email }
 
         return res.redirect(`/${user.id}`);
-      // }
+      }
     }
     // Otherwise display an error message to the user.
     errors.push('Login failed');
