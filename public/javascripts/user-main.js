@@ -1,9 +1,8 @@
-
-
 const modal = document.querySelector(".modal");
 const modalButton = document.querySelector(".modal-button");
 const closeButton = document.querySelector(".close-button");
 const cancelButton = document.querySelector('.cancel-button')
+const submitListButton = document.querySelector('.submit-list');
 
 function toggleModal() {
     modal.classList.toggle("show-modal");
@@ -19,8 +18,8 @@ window.addEventListener("click", (e) => {
     }
 });
 
-const submitButton = document.querySelector('.submit-list');
-submitButton.addEventListener('click', event => {
+submitListButton.addEventListener('click', async(event) => {
     event.preventDefault();
-
+    const lists = await fetch('/lists', { method: "POST" });
+    console.log('DEEEEBBBUUUUGGG', lists);
 });
