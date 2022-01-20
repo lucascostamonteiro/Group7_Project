@@ -5,9 +5,7 @@ const db = require('../db/models');
 
 /* GET users listing. */
 router.get('/', async (req, res, next) => {
-  console.log(req.params);
-  console.log(req.url);
-  const user = await db.User.findByPk(1);
+  const tasks = await db.User.findAll();
   res.render('user-main', {});
 });
 
