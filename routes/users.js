@@ -1,15 +1,17 @@
 const express = require('express')
 const router = express.Router();
 const db = require('../db/models');
-
+const { asyncHandler } = require('../routes/utils');
 
 /* GET users listing. */
-router.get('/', async (req, res, next) => {
-  const tasks = await db.User.findAll();
-  res.render('user-main', {});
-});
+router.get('/', asyncHandler(async (req, res, next) => {
+  const listsObj = await db.List.findAll();
+  const tasksObj = await db.Task.findAll();
+  res.render('user-main', { tasksObj ,listsObj });
+}));
 
-
+// router.get('/', asyncHandler(async (req, res, next) => {
+// }));
 
 
 
