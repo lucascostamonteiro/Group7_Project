@@ -10,11 +10,6 @@ router.get('/', asyncHandler(async (req, res, next) => {
   res.render('user-main', { tasksObj ,listsObj });
 }));
 
-// router.get('/', asyncHandler(async (req, res, next) => {
-// }));
-
-
-
 
 
 
