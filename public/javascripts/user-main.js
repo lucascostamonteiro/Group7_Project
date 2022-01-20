@@ -1,3 +1,5 @@
+
+
 const modal = document.querySelector(".modal");
 const modalButton = document.querySelector(".modal-button");
 const closeButton = document.querySelector(".close-button");
@@ -15,4 +17,10 @@ window.addEventListener("click", (e) => {
     if (e.target === modal) {
         toggleModal();
     }
+});
+
+const submitButton = document.querySelector('.submit-list');
+submitButton.addEventListener('click', event => {
+    event.preventDefault();
+
 });
