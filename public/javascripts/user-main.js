@@ -22,12 +22,16 @@ window.addEventListener("click", (e) => {
 submitListButton.addEventListener('click', async(event) => {
     const input = listInput.value;
     event.preventDefault();
-    const lists = await fetch('/lists', {
+    const res = await fetch('/lists', {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ input })
-     });
-    console.log('DEEEEBBBUUUUGGG', lists);
+      });
+      const data = await res.json();
+      console.log(data);
+      if (data.message === 'Success') {
+        console.log('very nice!!!')
+      }
 });

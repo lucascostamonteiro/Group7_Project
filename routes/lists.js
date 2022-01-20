@@ -11,12 +11,18 @@ const csrfProtection = csurf({ cookie: true });
 const router = express.Router();
 
 router.post('/', asyncHandler(async (req, res, next) => {
-    const user = await req.session.user;
-    const { name, input } = req.body;
-    const list =
-    console.log('HELLLOOOOOO', user, req.body)
+    const userId = await req.session.user.userId;
+    const name = req.body;
+
+    console.log(userId, req.body.input);
+
+    const listCreate = await db.List.create({
+      user_Id: userId,
+      name: req.body.input,
+      completed: false
+    });
+
     res.json({ message: 'Success' })
-    // res.redirect(`/${user.userId}`, { user })
 }))
 
 
