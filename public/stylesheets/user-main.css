@@ -21,12 +21,14 @@
     left: 50%;
     background-color: white;
     padding: 30px;
-    width: 60%;
+    width: 20%;
+    height: 30%;
     border-radius: 5px;
+    border: 1px solid #d1d1d1;
     align-items: center;
 }
 
-.close-button {
+/* .close-button {
     float: right;
     width: 1.5rem;
     line-height: 1.5rem;
@@ -34,9 +36,49 @@
     cursor: pointer;
     border-radius: 0.25rem;
     background-color: lightgray;
-}
+} */
 
 .show-modal {
     opacity: 1;
     visibility: visible;
+}
+
+.nav-title {
+    text-decoration: none;
+    color: white;
+    font-family: "Nunito";
+    font-weight: bold;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.bread-image {
+    height: 70px;
+    width: 70px;
+}
+
+.modal-content-buttons {
+    padding: 15px 15px;
+}
+
+.cancel-button {
+    margin-left: 10px;
+    padding: 5px;
+    min-width: 70px;
+}
+
+.add-list-button {
+    margin-right: 10px;
+    padding: 5px;
+    min-width: 70px;
+}
+
+.input-list-name {
+    padding: 5px 6px;
+}
+
+.modal-title {
+    padding-bottom: 10px;
 }

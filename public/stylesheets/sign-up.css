@@ -65,12 +65,14 @@ form {
 
 form input {
   padding: 10px;
-  font-size: 22px;
+  font-size: 18px;
   color: rgba(0, 0, 0, 0.356);
   margin-bottom: 10px;
   border: solid rgba(0, 0, 0, 0.363) 1px;
   border-radius: 5px;
+  color: black;
 }
+
 
 form button {
   background-color: #009DFF;

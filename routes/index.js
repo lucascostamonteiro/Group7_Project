@@ -52,7 +52,7 @@ const userValidators = [
     .isLength({ max: 50 })
     .withMessage('Password must not be more than 50 characters long')
     .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, 'g')
-    .withMessage('Password must contain at least 1 lowercase letter, uppercase letter, number, and special character (i.e. "!@#$%^&*")'),
+    .withMessage('Password must contain at least 1 lowercase letter, uppercase letter, number, and special character ("!@#$%^&*")'),
   check('confirmPassword')
     .exists({ checkFalsy: true })
     .withMessage('Please provide a value for Confirm Password')
@@ -117,13 +117,13 @@ router.post('/log-in', csrfProtection, loginValidators, asyncHandler(async (req,
 
     if (user !== null) {
 
-      const passwordMatch = await bcrypt.compare(password, user.password.toString());
-      if (passwordMatch) {
+      // const passwordMatch = await bcrypt.compare(password, user.password.toString()); // THIS IS COMMENTED OUT FOR TESTING
+      // if (passwordMatch) {
 
         req.session.user = { userId: user.id, email: user.email }
 
         return res.redirect(`/${user.id}`);
-      }
+      // }
     }
     // Otherwise display an error message to the user.
     errors.push('Login failed');
