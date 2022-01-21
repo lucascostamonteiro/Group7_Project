@@ -2,8 +2,8 @@ const modal = document.querySelector(".modal");
 const modalButton = document.querySelector(".modal-button");
 const closeButton = document.querySelector(".close-button");
 const cancelButton = document.querySelector('.cancel-button')
-const submitListButton = document.querySelector('.submit-list');
-const listInput = document.querySelector('.list-input');
+const submitListButton = document.querySelector('.add-list-button');
+const listInput = document.querySelector('.input-list-name');
 
 function toggleModal() {
     modal.classList.toggle("show-modal");
