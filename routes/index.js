@@ -95,7 +95,6 @@ router.post('/sign-up', csrfProtection, userValidators, asyncHandler(async (req,
     res.redirect(`/${user.id}`);
   } else {
     const errors = validatorErrors.array().map((error) => error.msg);
-    // console.log('DEBUG:', errors);
     res.render('sign-up', {
       title: 'Sign-Up',
       user,
@@ -154,10 +153,9 @@ router.get('/demo', (req, res) => {
   })
 });
 
-// router.post('/demo', csrfProtection, asyncHandler(async (req, res) => {
-//   const { firstName: Alec, lastName: Bread, email:'bread@bread.com'}
-//   const userId = 1;
-//   res.redirect(`/${userId}`)
-// }))
+router.post('/demo', csrfProtection, asyncHandler(async (req, res) => {
+
+  res.redirect(`/${userId}`)
+}))
 
 module.exports = router;
