@@ -13,6 +13,7 @@ router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
   });
   const tasksObj = await db.Task.findAll({
     includes: db.User.id
+    //listId
   });
   res.render('user-main', { tasksObj ,listsObj, csrfToken: req.csrfToken() });
 }));
