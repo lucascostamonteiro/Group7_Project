@@ -18,6 +18,8 @@ router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
   const tasksObj = await db.Task.findAll({
     where: {
       user_id: userid
+      // listId
+      // TODO
     }
   });
   res.render('user-main', { tasksObj, listsObj, csrfToken: req.csrfToken() });
