@@ -4,8 +4,34 @@ const closeButton = document.querySelector(".close-button");
 const cancelButton = document.querySelector('.cancel-button')
 const submitListButton = document.querySelector('.add-list-button');
 const listInput = document.querySelector('.input-list-name');
-let listInnerText = 'testtttt';
+let listInnerText = '';
 let listInner;
+
+
+// LISTS
+
+let listDeleter = async (event) => {
+  const listChildren = Array.from(event.target.parentNode.childNodes);
+  listChildren.forEach(ele => {
+    if (ele.innerText !== 'edit' && ele.innerText !== 'delete') {
+      listInnerText = ele.innerText;
+      listInner = ele;
+    }
+  })
+  const res = await fetch('/lists', {
+    method: "DELETE",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ listInnerText })
+  });
+  const data = await res.json();
+  if (data.message === 'Success') {
+    let listUl = document.querySelector('.list_summary');
+    listUl.removeChild(listInner.parentNode);
+  }
+}
+
 
 window.addEventListener("DOMContentLoaded", () => {
   let allLists = Array.from(document.querySelectorAll('.list_summary > li'));
@@ -19,28 +45,6 @@ window.addEventListener("DOMContentLoaded", () => {
       console.log('user-main.js Line:18')
     })
   })
-
-  let listDeleter = async(event) => {
-    const listChildren = Array.from(event.target.parentNode.childNodes);
-    listChildren.forEach(ele => {
-      if (ele.innerText !== 'edit' && ele.innerText !== 'delete') {
-        listInnerText = ele.innerText;
-        listInner = ele;
-      }
-    })
-    const res = await fetch('/lists', {
-      method: "DELETE",
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ listInnerText })
-    });
-    const data = await res.json();
-    if (data.message === 'Success') {
-      let listUl = document.querySelector('.list_summary');
-      listUl.removeChild(listInner.parentNode);
-    }
-  }
 
   let listDelete = Array.from(document.querySelectorAll('.list_summary > li > .list-delete'));
   listDelete.forEach(ele => {
@@ -72,7 +76,7 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 function toggleModal() {
-    modal.classList.toggle("show-modal");
+  modal.classList.toggle("show-modal");
 }
 
 modalButton.addEventListener("click", e => {
@@ -100,75 +104,82 @@ cancelButton.addEventListener('click', (e) => {
 //     }
 // });
 
-let listPut = async(event) => {
+let listPut = async (event) => {
   const input = listInput.value;
   event.stopPropagation();
   event.preventDefault();
   const res = await fetch('/lists', {
-      method: "PUT",
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ input, listInnerText })
-    });
-    const data = await res.json();
-    if (data.message === 'Success') {
-      toggleModal();
-      let listUl = document.querySelector('.list_summary');
-      const newDivList = document.createElement("div");
-      const newDivText = document.createElement("div");
-      newDivText.setAttribute('id', 'list-text');
-      newDivText.classList.add('list-text');
-      const newButtonEdit = document.createElement("button");
-      newButtonEdit.classList.add('list-text');
-      const newButtonDelete = document.createElement("button");
-      const divTextText = document.createTextNode(input);
-      newDivText.appendChild(divTextText);
-      const divButtonEdit = document.createTextNode('edit');
-      newButtonEdit.appendChild(divButtonEdit);
-      const divButtonDelete = document.createTextNode('delete');
-      newButtonDelete.appendChild(divButtonDelete);
-      newDivList.appendChild(newDivText);
-      newDivList.appendChild(newButtonEdit);
-      newDivList.appendChild(newButtonDelete);
-      listUl.replaceChild(newDivList, listInner.parentNode);
-    }
+    method: "PUT",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ input, listInnerText })
+  });
+  const data = await res.json();
+  if (data.message === 'Success') {
+    toggleModal();
+    let listUl = document.querySelector('.list_summary');
+    const newDivList = document.createElement("div");
+    const newDivText = document.createElement("div");
+    newDivText.setAttribute('id', 'list-text');
+    newDivText.classList.add('list-text');
+    const newButtonEdit = document.createElement("button");
+    newButtonEdit.classList.add('list-text');
+    const newButtonDelete = document.createElement("button");
+    const divTextText = document.createTextNode(input);
+    newDivText.appendChild(divTextText);
+    const divButtonEdit = document.createTextNode('edit');
+    newButtonEdit.appendChild(divButtonEdit);
+    const divButtonDelete = document.createTextNode('delete');
+    newButtonDelete.appendChild(divButtonDelete);
+    newDivList.appendChild(newDivText);
+    newDivList.appendChild(newButtonEdit);
+    newDivList.appendChild(newButtonDelete);
+    listUl.replaceChild(newDivList, listInner.parentNode);
+  }
 }
 
-let listPost = async(event) => {
+let listPost = async (event) => {
   const input = listInput.value;
   event.stopPropagation();
   event.preventDefault();
   const res = await fetch('/lists', {
-      method: "POST",
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ input })
-    });
-    const data = await res.json();
-    if (data.message === 'Success') {
-      toggleModal();
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ input })
+  });
 
-      let listUl = document.querySelector('.list_summary');
-      const newDivList = document.createElement("div");
-      const newDivText = document.createElement("div");
-      newDivText.setAttribute('id', 'list-text');
-      newDivText.classList.add('list-text');
-      const newButtonEdit = document.createElement("button");
-      newButtonEdit.classList.add('list-text');
-      const newButtonDelete = document.createElement("button");
-      const divTextText = document.createTextNode(input);
-      newDivText.appendChild(divTextText);
-      const divButtonEdit = document.createTextNode('edit');
-      newButtonEdit.appendChild(divButtonEdit);
-      const divButtonDelete = document.createTextNode('delete');
-      newButtonDelete.appendChild(divButtonDelete);
-      newDivList.appendChild(newDivText);
-      newDivList.appendChild(newButtonEdit);
-      newDivList.appendChild(newButtonDelete);
-      listUl.appendChild(newDivList);
-    }
+  const data = await res.json();
+  if (data.message === 'Success') {
+    toggleModal();
+
+    let listUl = document.querySelector('.list_summary');
+    const newDivList = document.createElement("div");
+    const newDivText = document.createElement("div");
+    newDivText.setAttribute('id', 'list-text');
+    newDivText.classList.add('list-text');
+    const newButtonEdit = document.createElement("button");
+    newButtonEdit.classList.add('list-text');
+    const newButtonDelete = document.createElement("button");
+    const divTextText = document.createTextNode(input);
+    newDivText.appendChild(divTextText);
+    const divButtonEdit = document.createTextNode('edit');
+    newButtonEdit.appendChild(divButtonEdit);
+    const divButtonDelete = document.createTextNode('delete');
+    newButtonDelete.appendChild(divButtonDelete);
+    newDivList.appendChild(newDivText);
+    newDivList.appendChild(newButtonEdit);
+    newDivList.appendChild(newButtonDelete);
+    listUl.appendChild(newDivList);
+    newButtonEdit.addEventListener('click', listPut);
+    newButtonDelete.addEventListener('click', listDeleter);
+  }
 }
 
 submitListButton.addEventListener('click', listPost);
+
+
+
+// TASKS
