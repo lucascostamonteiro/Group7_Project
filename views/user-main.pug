@@ -9,21 +9,20 @@ append head
 block content
   div(class='welcome') Welcome #{user.firstName}
 
-  each list in listsObj
-    li= list.name
-
-  each task in tasksObj
-    li= task.task
-
+  ul(class="list_summary")
+    each list in listsObj
+      li= list.name
+    each task in tasksObj
+      li= task.task
 
   button(class='modal-button') Create List
   div(class='modal')
     div(class='modal-content')
       span(class='close-button')
       div(class="modal-title")
-        p Add List
+        p(class='firstP') Add List
         p Please enter a new list name:
-        form(action=`/lists` method='post')
+        form(action=`/lists` method='post' class='modal-form')
           input(type='hidden' name='_csrf' value=csrfToken)
           input(type='text' class="input-list-name" placeHolder='List Name')
           div(class='modal-content-buttons')

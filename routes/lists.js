@@ -4,7 +4,7 @@ const db = require('../db/models');
 const { asyncHandler } = require('../routes/utils');
 const csurf = require('csurf');
 const csrfProtection = csurf({ cookie: true });
-
+const { Op } = require("sequelize");
 
 
 
@@ -13,8 +13,6 @@ const router = express.Router();
 router.post('/', asyncHandler(async (req, res, next) => {
     const userId = await req.session.user.userId;
     const name = req.body.input;
-
-    console.log(userId, name);
 
     const listCreate = await db.List.create({
       name,
@@ -25,9 +23,49 @@ router.post('/', asyncHandler(async (req, res, next) => {
     res.json({ message: 'Success' })
 }))
 
+router.put('/', asyncHandler(async (req, res, next) => {
+  const userId = await req.session.user.userId;
+  const name = req.body.input;
+  const target = req.body.listInnerText;
 
+  let toDestroy = await db.List.findAll({
+    where: {
+      name: {
+        [Op.eq]: target
+      }
+    }
+  });
 
+  await db.List.destroy({
+    where: {
+      name: {
+        [Op.eq]: target
+      }
+    }
+  });
 
+  const listCreate = await db.List.create({
+    name,
+    user_id: userId,
+    completed: false
+  });
+
+  res.json({ message: 'Success' })
+}))
+
+router.delete('/', asyncHandler(async (req, res, next) => {
+  const target = req.body.listInnerText;
+
+  await db.List.destroy({
+    where: {
+      name: {
+        [Op.eq]: target
+      }
+    }
+  });
+
+  res.json({ message: 'Success' })
+}))
 
 
 
