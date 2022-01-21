@@ -1,3 +1,7 @@
+* {
+    background-color: #bfd8f5;
+}
+
 .modal {
     display: flex;
     flex-direction: column;
@@ -26,6 +30,7 @@
     border-radius: 5px;
     border: 1px solid #d1d1d1;
     align-items: center;
+    font-family: 'Nunito';
 }
 
 /* .close-button {
@@ -45,13 +50,14 @@
 
 .nav-title {
     text-decoration: none;
-    color: white;
     font-family: "Nunito";
     font-weight: bold;
     width: 100px;
     display: flex;
     flex-direction: column;
     justify-content: end;
+    padding: 5px;
+    -webkit-text-stroke: 1px black;
 }
 
 .bread-image {
@@ -81,4 +87,77 @@
 
 .modal-title {
     padding-bottom: 10px;
+}
+
+#list-text {
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.list-edit, .list-delete {
+    padding: 5px;
+    margin-left: 5px;
+    color: white;
+    border-radius: 5px;
+}
+
+.list-edit {
+    background-color: #009DFF;
+    border: solid #009DFF 1px;
+}
+
+.list-delete {
+    background-color: rgb(218, 67, 7);
+    border: solid rgb(218, 67, 7) 1px;
+}
+
+.all-list-items {
+    margin-left: 10px;
+}
+
+.modal-button {
+    padding: 5px;
+    background-color: white;
+    margin-left: 20px;
+    margin-top: 10px;
+    color: #009DFF;
+    border: solid #009DFF 2px;
+    border-radius: 5px;
+}
+
+.bread-pic {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+
+}
+
+.nav-bar-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.log-out {
+    text-decoration: none;
+    border: solid white 2px;
+    background-color: rgb(212, 212, 212);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.buttons li {
+    list-style-type: none;
+    margin-top: 60px;
+}
+
+.welcome {
+    text-align: center;
+    font-family: 'Nunito';
+    font-weight: bolder;
+}
+
+.list-text {
+    display: inline-block;
+    width: 15%;
 }
