@@ -11,16 +11,21 @@ function toggleModal() {
 
 modalButton.addEventListener("click", toggleModal);
 closeButton.addEventListener("click", toggleModal);
-cancelButton.addEventListener('click', toggleModal);
+cancelButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  toggleModal();
+})
 
-window.addEventListener("click", (e) => {
-    if (e.target === modal) {
-        toggleModal();
-    }
-});
+// window.addEventListener("click", (e) => {
+//     if (e.target === modal) {
+//         toggleModal();
+//     }
+// });
 
 submitListButton.addEventListener('click', async(event) => {
     const input = listInput.value;
+    event.stopPropagation();
     event.preventDefault();
     const res = await fetch('/lists', {
         method: "POST",
@@ -30,8 +35,9 @@ submitListButton.addEventListener('click', async(event) => {
         body: JSON.stringify({ input })
       });
       const data = await res.json();
-      console.log(data);
       if (data.message === 'Success') {
-        console.log('very nice!!!')
+        toggleModal();
+        let welcome = document.querySelector('.welcome');
+        welcome.innerHTML += `<li> ${input} </li>`
       }
 });
