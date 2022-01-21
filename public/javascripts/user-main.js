@@ -161,8 +161,21 @@ let listPost = async (event) => {
     newDivText.setAttribute('id', 'list-text');
     newDivText.classList.add('list-text');
     const newButtonEdit = document.createElement("button");
+    newButtonEdit.style.padding = '5px';
+    newButtonEdit.style.marginLeft = '5px';
+    newButtonEdit.style.color = 'white';
+    newButtonEdit.style.backgroundColor = '#009DFF';
+    newButtonEdit.style.border = 'solid #009DFF 1px';
+    newButtonEdit.style.borderRadius = '5px'
     newButtonEdit.classList.add('list-text');
     const newButtonDelete = document.createElement("button");
+    newButtonDelete.style.padding = '5px';
+    newButtonDelete.style.marginLeft = '5px';
+    newButtonDelete.style.color = 'white';
+    newButtonDelete.style.backgroundColor =  'rgb(218, 67, 7)';
+    newButtonDelete.style.border = 'solid rgb(218, 67, 7) 1px';
+    newButtonDelete.style.borderRadius = '5px'
+    newButtonEdit.classList.add('list-text');
     const divTextText = document.createTextNode(input);
     newDivText.appendChild(divTextText);
     const divButtonEdit = document.createTextNode('edit');
