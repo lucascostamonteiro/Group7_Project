@@ -7,15 +7,16 @@ append head
 
 
 block content
-  div(class='welcome') Welcome #{user.firstName}
-
-  ul(class="list_summary")
-    each list in listsObj
-      li= list.name
-    each task in tasksObj
-      li= task.task
+  h1(class='welcome') Welcome #{user.firstName}
 
   button(class='modal-button') Create List
+  div(class='all-list-items')
+    ul(class="list_summary")
+      each list in listsObj
+        li= list.name
+      each task in tasksObj
+        li= task.task
+
   div(class='modal')
     div(class='modal-content')
       span(class='close-button')
