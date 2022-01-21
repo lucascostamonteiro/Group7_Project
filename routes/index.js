@@ -3,7 +3,7 @@ const csurf = require('csurf');
 const db = require('../db/models');
 const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
-const { asyncHandler } = require('../routes/utils');
+const { asyncHandler, demoLogin } = require('../routes/utils');
 const csrfProtection = csurf({ cookie: true });
 
 const router = express.Router();
@@ -119,9 +119,9 @@ router.post('/log-in', csrfProtection, loginValidators, asyncHandler(async (req,
       // const passwordMatch = await bcrypt.compare(password, user.password.toString()); // THIS IS COMMENTED OUT FOR TESTING
       // if (passwordMatch) {
 
-        req.session.user = { userId: user.id, email: user.email }
+      req.session.user = { userId: user.id, email: user.email }
 
-        return res.redirect(`/${user.id}`);
+      return res.redirect(`/${user.id}`);
       // }
     }
     // Otherwise display an error message to the user.
@@ -145,17 +145,12 @@ router.get('/log-out', (req, res) => {
   })
 })
 
-router.get('/demo', (req, res) => {
-  res.render('user-main', {
-    user: {
-    firstName: 'Demo User',
-    }
-  })
-});
 
-router.post('/demo', csrfProtection, asyncHandler(async (req, res) => {
+router.post('/demo', asyncHandler(async (req, res) => {
+  req.session.user = { userId: 3, email: "demo@user.com" }
+  console.log("DEBUGG")
+  res.redirect(`/3`)
+}));
 
-  res.redirect(`/${userId}`)
-}))
 
 module.exports = router;
