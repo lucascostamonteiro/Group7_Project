@@ -7,7 +7,7 @@ append head
 
 
 block content
-  div Welcome #{user.firstName}
+  div(class='welcome') Welcome #{user.firstName}
 
   each list in listsObj
     li= list.name

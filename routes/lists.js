@@ -12,13 +12,13 @@ const router = express.Router();
 
 router.post('/', asyncHandler(async (req, res, next) => {
     const userId = await req.session.user.userId;
-    const name = req.body;
+    const name = req.body.input;
 
-    console.log(userId, req.body.input);
+    console.log(userId, name);
 
     const listCreate = await db.List.create({
-      user_Id: userId,
-      name: req.body.input,
+      name,
+      user_id: userId,
       completed: false
     });
 
