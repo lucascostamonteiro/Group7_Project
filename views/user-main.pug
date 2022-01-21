@@ -20,10 +20,12 @@ block content
   div(class='modal')
     div(class='modal-content')
       span(class='close-button')
-      p Please enter a new list name:
-      form(action=`/lists` method='post')
-        input(type='hidden' name='_csrf' value=csrfToken)
-        input(type='text' class='list-input', placeHolder='List Name')
-        div(class='modal-buttons')
-          button(type='submit' class='submit-list') Add List
+      div(class="modal-title")
+        p Add List
+        p Please enter a new list name:
+        form(action=`/lists` method='post')
+          input(type='hidden' name='_csrf' value=csrfToken)
+          input(type='text' class="input-list-name" placeHolder='List Name')
+          div(class='modal-content-buttons')
+          button(type='submit' class='add-list-button') Add List
           button(class='cancel-button') Cancel

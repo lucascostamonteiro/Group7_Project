@@ -1,9 +1,11 @@
 doctype html
 html
   head
+    link(rel="icon" type="image/png" href="https://icons-for-free.com/iconfiles/png/512/bread+bread+loaf+food+toast+icon-1320168012160404253.png")
     link(rel="stylesheet" href="stylesheets/sign-up.css")
     link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito")
     script(src="/javascripts/sign-up.js" type="module" defer)
+    include utils.pug
   body
     div(class='right-side')
       div(class="form-div")
@@ -12,23 +14,52 @@ html
             li: a(class="login-button" href="/log-in") Log in
           if locals.authenticated
             li: a(href="/log-out") Logout
-      div(class="actual-form-div")
-        if (errors.length > 0)
-            div(class='' role='alert')
-                p The following error(s) occurred:
-                ul
-                    each error in errors
-                        li= error
-        div(class="form-div")
-            form(action="/sign-up" method="post")
-                div(class='sign-up-sentence') Sign up for free.
-                input(type="hidden" name="_csrf" value=csrfToken)
-                input(type="text" name="firstName" placeholder='First Name')
-                input(type="text" name="lastName" placeholder='Last Name')
-                input(type="text" name="email" placeholder="Email")
-                input(type="password" name="password" placeholder='Password')
-                input(type="password" name="confirmPassword" placeholder='Confirm Password')
-                button(type="submit") Sign-Up!
+      //- div(class="errors-form-div")
+      //-   if (errors.length > 0)
+      //-           p The following error(s) occurred:
+      //-           ul
+      //-               each error in errors
+      //-                   li= error
+      div(class="form-div")
+          form(action="/sign-up" method="post")
+              div(class='sign-up-sentence') Sign up for free.
+              input(type="hidden" name="_csrf" value=csrfToken)
+              input(class="input-box-error" type="text" name="firstName" placeholder='First Name')
+              div(class="error-msg")
+                if !input
+                  each error in errors
+                    -if(error.includes("Please provide a value for First Name"))
+                        p= error
+              input(class="input-box-error" type="text" name="lastName" placeholder='Last Name')
+              div(class="error-msg")
+                if !input
+                  each error in errors
+                    -if(error.includes("Please provide a value for Last Name"))
+                        p= error
+              input(class="input-box-error" type="text" name="email" placeholder="Email")
+              div(class="error-msg")
+                if !input
+                  each error in errors
+                    -if(error.includes("Please provide a value for Email Address"))
+                        p= error
+                -else if (input.includes('[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+')) // TO FIX
+                  each error in errors
+                    -if(error.includes("Email Address is not a valid email"))
+                      p= error
+              input(class="input-box-error" type="password" name="password" placeholder='Password')
+              div(class="error-msg")
+                if !input
+                  each error in errors
+                    -if(error.includes("Please provide a value for Password"))
+                        p= error
+              input(class="input-box-error" type="password" name="confirmPassword" placeholder='Confirm Password')
+              div(class="error-msg")
+                if !input
+                  each error in errors
+                    -if(error.includes("Please provide a value for Confirm Password"))
+                        p= error
+
+              button(type="submit") Sign-Up!
 
 
 

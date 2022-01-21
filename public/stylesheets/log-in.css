@@ -5,7 +5,7 @@ ul {
 }
 
 .buttons li {
-  display:inline-block;
+  display: inline-block;
   margin: 0 25px;
 }
 
@@ -18,6 +18,14 @@ ul {
 
 .buttons a {
   text-decoration: none;
+  color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 96, 191, 0.1);
+  border-color: transparent;
+  font-size: 15px;
+  padding: 10px 15px 8px;
+  font-weight: 700;
+  border-radius: 3px;
+  font-family: Nunito;
 }
 
 .right-side {
@@ -28,39 +36,35 @@ ul {
   margin-top: 20px;
 }
 
-.sign-up-sentence {
-  padding: 25px;
-
-}
 
 .form-div {
-  padding: 10px;
+  padding: 25px;
   display: flex;
   justify-content: end;
   align-items: center;
-  width: 50%;
+  width: 60%;
 }
 
 form {
   margin-top: 110px;
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 70px;
   justify-content: center;
   width: 50%;
 }
 
 form input {
   padding: 10px;
-  font-size: 22px;
-  color:rgba(0, 0, 0, 0.356);
+  font-size: 18px;
+  color: black;
   margin-bottom: 10px;
-  border: solid rgba(0, 0, 0, 0.363) 1px;
+  border: solid black 1px;
   border-radius: 5px;
 }
 
 form button {
-  background-color:#009DFF;
+  background-color: #009DFF;
   border: solid #009DFF 1px;
   color: white;
   padding-top: 10px;
@@ -100,13 +104,11 @@ form a {
 
 body {
   height: 100vh;
-  background: linear-gradient(
-    to right,
-    #0060BF 0%,
-    #0060BF 50%,
-    white 50%,
-    white 100%
-  );
+  background: linear-gradient(to right,
+      #0060BF 0%,
+      #0060BF 50%,
+      white 50%,
+      white 100%);
 }
 
 .quote {
@@ -116,7 +118,8 @@ body {
   padding: 250px
 }
 
-h1, h2 {
+h1,
+h2 {
   margin-top: 5px;
   margin-bottom: 5px;
   color: white;
@@ -171,7 +174,7 @@ h1, h2 {
 }
 
 main {
-  position:fixed;
-	top:0;
-	left:0;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
