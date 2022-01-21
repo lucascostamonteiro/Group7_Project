@@ -8,4 +8,8 @@ demoButton.addEventListener('click', async (event) => {
             "Content-Type": "application/json"
         },
     })
+    const data = await res.json();
+    if (data.message === 'Success') {
+        window.location.href = '/1';
+    }
 })

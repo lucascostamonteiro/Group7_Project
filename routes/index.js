@@ -147,8 +147,9 @@ router.get('/log-out', (req, res) => {
 
 
 router.post('/demo', asyncHandler(async (req, res) => {
-  req.session.user = { userId: 3, email: "demo@user.com" }
-  req.session.save(() => res.redirect(req.session.user.userId));
+  req.session.user = { userId: 1, email: "alec@alec.alec" }
+  // req.session.save(() => res.redirect(req.session.user.userId));
+  req.session.save(() => res.json({ message: "Success" }));
 }));
 
 
