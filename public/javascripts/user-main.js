@@ -183,3 +183,47 @@ submitListButton.addEventListener('click', listPost);
 
 
 // TASKS
+
+window.addEventListener("DOMContentLoaded", () => {
+  let allTasks = Array.from(document.querySelectorAll('.tasks_summary > li'));
+  allTasks.forEach(ele => {
+    ele.innerHTML = `<div id='list-text' class='list-text'>${ele.innerHTML}</div><button class='list-edit'>edit</button><button class ='list-delete'>delete</button>`
+  })
+});
+const taskButton = document.querySelector('.button-task');
+taskButton.addEventListener('click', async (event) => {
+  event.preventDefault();
+  const taskInput = document.querySelector('.task-input').value;
+  const res = await fetch('/tasks', {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ taskInput })
+  });
+
+  const data = await res.json();
+  if (data.message === 'Success') {
+
+    let taskUl = document.querySelector('.tasks_summary');
+    const newDivList = document.createElement("div");
+    const newDivText = document.createElement("div");
+    newDivText.setAttribute('id', 'list-text');
+    newDivText.classList.add('list-text');
+    const newButtonEdit = document.createElement("button");
+    newButtonEdit.classList.add('list-text');
+    const newButtonDelete = document.createElement("button");
+    const divTextText = document.createTextNode(taskInput);
+    newDivText.appendChild(divTextText);
+    const divButtonEdit = document.createTextNode('edit');
+    newButtonEdit.appendChild(divButtonEdit);
+    const divButtonDelete = document.createTextNode('delete');
+    newButtonDelete.appendChild(divButtonDelete);
+    newDivList.appendChild(newDivText);
+    newDivList.appendChild(newButtonEdit);
+    newDivList.appendChild(newButtonDelete);
+    taskUl.appendChild(newDivList);
+    newButtonEdit.addEventListener('click', taskPut); // TO DO
+    newButtonDelete.addEventListener('click', taskDeleter); // TO DO
+  }
+});
