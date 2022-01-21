@@ -8,13 +8,19 @@ const csrfProtection = csurf({ cookie: true });
 
 /* GET users listing. */
 router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
+  const userid = await req.session.user.userId;
   const listsObj = await db.List.findAll({
-    includes: db.User.id
+    where: {
+      user_id: userid
+    }
   });
+  // console.log('DEBUG:' , req.session.list)
   const tasksObj = await db.Task.findAll({
-    includes: db.User.id
+    where: {
+      user_id: userid
+    }
   });
-  res.render('user-main', { tasksObj ,listsObj, csrfToken: req.csrfToken() });
+  res.render('user-main', { tasksObj, listsObj, csrfToken: req.csrfToken() });
 }));
 
 
