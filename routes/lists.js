@@ -6,9 +6,39 @@ const csurf = require('csurf');
 const csrfProtection = csurf({ cookie: true });
 const { Op } = require("sequelize");
 
-
-
 const router = express.Router();
+
+// Actually a 'get' request v v v
+router.post('/allLists', asyncHandler(async (req, res, next) => {
+  const userId = await req.session.user.userId;
+  const listName = req.body.listName;
+
+  let listId = await db.List.findOne({
+    where: {
+      name: {
+        [Op.eq]: listName
+      }
+    }
+  })
+
+  let listTasks = await db.Task.findAll({
+    where: {
+      user_id: {
+        [Op.eq]: userId
+      },
+      list_id: {
+        [Op.eq]: listId.id
+      }
+    }
+  })
+
+  let allTasks = []
+  listTasks.forEach(ele => {
+    allTasks.push(ele.task);
+  })
+
+  res.json({ tasks: allTasks })
+}))
 
 router.post('/', asyncHandler(async (req, res, next) => {
     const userId = await req.session.user.userId;

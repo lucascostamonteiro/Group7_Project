@@ -10,18 +10,32 @@ const router = express.Router();
 
 
 router.post('/', asyncHandler(async (req, res, next) => {
-    const userId = await req.session.user.userId;
-    const task = req.body.taskInput;
-    await db.Task.create({
-        task,
-        user_id: userId,
-        list_id: '1',
-        completed: false,
-        expected_completion: new Date(),
-        actual_completion: new Date()
-    });
+  const userId = await req.session.user.userId;
+  const task = req.body.taskInput;
+  const myList = req.body.currentList;
 
-    res.json({ message: 'Success' })
+  if (myList === 'allTasks') {
+    listId = 0;
+  } else {
+    listId = await db.List.findOne({
+      where: {
+        name: {
+          [Op.eq]: myList
+        }
+      }
+    })
+  }
+
+  await db.Task.create({
+    task,
+    user_id: userId,
+    list_id: listId.id,
+    completed: false,
+    expected_completion: new Date(),
+    actual_completion: new Date()
+  });
+
+  res.json({ message: 'Success' })
 }))
 
 router.delete('/', asyncHandler(async (req, res, next) => {
@@ -42,6 +56,21 @@ router.put('/', asyncHandler(async (req, res, next) => {
   const userId = await req.session.user.userId;
   const task = req.body.input;
   const target = req.body.listInnerText;
+  const myList = req.body.currentList;
+
+  let listId;
+
+  if (myList === 'allTasks') {
+    listId = 0;
+  } else {
+    listId = await db.List.findOne({
+      where: {
+        name: {
+          [Op.eq]: myList
+        }
+      }
+    })
+  }
 
   await db.Task.destroy({
     where: {
@@ -54,28 +83,14 @@ router.put('/', asyncHandler(async (req, res, next) => {
   await db.Task.create({
     task,
     user_id: userId,
-    list_id: '1',
+    list_id: listId.id,
     completed: false,
     expected_completion: new Date(),
     actual_completion: new Date()
-});
+  });
 
   res.json({ message: 'Success' })
 }))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 module.exports = router;

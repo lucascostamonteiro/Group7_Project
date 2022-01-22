@@ -6,6 +6,7 @@ const submitListButton = document.querySelector('.add-list-button');
 const listInput = document.querySelector('.input-list-name');
 let listInnerText = '';
 let listInner;
+let currentList = 'allTasks';
 
 
 // LISTS
@@ -41,9 +42,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   let listText = Array.from(document.querySelectorAll('.list_summary > li > div'));
   listText.forEach(ele => {
-    ele.addEventListener("click", (e) => {
-      console.log('user-main.js Line:18')
-    })
+    ele.addEventListener("click", listGet)
   })
 
   let listDelete = Array.from(document.querySelectorAll('.list_summary > li > .list-delete'));
@@ -77,6 +76,45 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
+let listGet = async (event) => {
+  let listName = event.target.innerText;
+  currentList = listName;
+  let res = await fetch('/lists/allLists', {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ listName })
+  });
+  const data = await res.json();
+
+  let taskUl = document.querySelector('.tasks_summary');
+  while (taskUl.firstChild) {
+    taskUl.removeChild(taskUl.firstChild)
+  }
+
+  data.tasks.forEach(ele => {
+    const newDivList = document.createElement("li");
+    const newDivText = document.createElement("div");
+    newDivText.setAttribute('id', 'list-text');
+    newDivText.classList.add('list-text');
+    const newButtonEdit = document.createElement("button");
+    newButtonEdit.classList.add('list-text');
+    const newButtonDelete = document.createElement("button");
+    const divTextText = document.createTextNode(ele);
+    newDivText.appendChild(divTextText);
+    const divButtonEdit = document.createTextNode('edit');
+    newButtonEdit.appendChild(divButtonEdit);
+    const divButtonDelete = document.createTextNode('delete');
+    newButtonDelete.appendChild(divButtonDelete);
+    newDivList.appendChild(newDivText);
+    newDivList.appendChild(newButtonEdit);
+    newDivList.appendChild(newButtonDelete);
+    taskUl.appendChild(newDivList);
+    newButtonEdit.addEventListener('click', taskPut); // TO DO
+    newButtonDelete.addEventListener('click', taskDeleter); // TO DO
+  })
+}
 
 function toggleModal() {
   modal.classList.toggle("show-modal");
@@ -102,12 +140,6 @@ cancelButton.addEventListener('click', (e) => {
   toggleModal();
 })
 
-// window.addEventListener("click", (e) => {
-//     if (e.target === modal) {
-//         toggleModal();
-//     }
-// });
-
 let listPut = async (event) => {
   const input = listInput.value;
   event.stopPropagation();
@@ -123,7 +155,7 @@ let listPut = async (event) => {
   if (data.message === 'Success') {
     toggleModal();
     let listUl = document.querySelector('.list_summary');
-    const newDivList = document.createElement("div");
+    const newDivList = document.createElement("li");
     const newDivText = document.createElement("div");
     newDivText.setAttribute('id', 'list-text');
     newDivText.classList.add('list-text');
@@ -139,7 +171,19 @@ let listPut = async (event) => {
     newDivList.appendChild(newDivText);
     newDivList.appendChild(newButtonEdit);
     newDivList.appendChild(newButtonDelete);
-    listUl.replaceChild(newDivList, listInner.parentNode);
+    listUl.appendChild(newDivList);
+    let listArray = Array.from(listUl);
+    let nodeToReplace = newDivList;
+    listArray.forEach(ele => {
+      if (ele.innerText === input) {
+        nodeToReplace = ele;
+        listUl.replaceChild(newDivList, nodeToReplace);
+      } else {
+        listUl.replaceChildren(newDivList, listInner);
+      }
+    })
+    newButtonEdit.addEventListener('click', listPut);
+    newButtonDelete.addEventListener('click', listDeleter);
   }
 }
 
@@ -160,7 +204,7 @@ let listPost = async (event) => {
     toggleModal();
 
     let listUl = document.querySelector('.list_summary');
-    const newDivList = document.createElement("div");
+    const newDivList = document.createElement("li");
     const newDivText = document.createElement("div");
     newDivText.setAttribute('id', 'list-text');
     newDivText.classList.add('list-text');
@@ -198,7 +242,7 @@ let listPost = async (event) => {
   }
 }
 
-submitListButton.addEventListener('click', listPost);
+// submitListButton.addEventListener('click', listPost);
 
 let taskPut = async (event) => {
   const input = listInput.value;
@@ -209,13 +253,13 @@ let taskPut = async (event) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ input, listInnerText })
+    body: JSON.stringify({ input, listInnerText, currentList })
   });
   const data = await res.json();
   if (data.message === 'Success') {
     toggleModal();
-    let listUl = document.querySelector('.tasks_summary');
-    const newDivList = document.createElement("div");
+    let taskUl = document.querySelector('.tasks_summary');
+    const newDivList = document.createElement("li");
     const newDivText = document.createElement("div");
     newDivText.setAttribute('id', 'list-text');
     newDivText.classList.add('list-text');
@@ -231,7 +275,9 @@ let taskPut = async (event) => {
     newDivList.appendChild(newDivText);
     newDivList.appendChild(newButtonEdit);
     newDivList.appendChild(newButtonDelete);
-    listUl.replaceChild(newDivList, listInner.parentNode);
+    taskUl.replaceChild(newDivList, listInner.parentNode);
+    newButtonEdit.addEventListener('click', taskPut);
+    newButtonDelete.addEventListener('click', taskDeleter);
   }
 }
 
@@ -261,14 +307,14 @@ window.addEventListener("DOMContentLoaded", () => {
         modalAddButton.removeEventListener('click', listPost);
         modalAddButton.removeEventListener('click', listPut);
         modalAddButton.addEventListener('click', taskPut);
-        const listChildren = Array.from(e.target.parentNode.childNodes);
-        listChildren.forEach(ele => {
-          if (ele.innerText !== 'edit' && ele.innerText !== 'delete') {
-            listInnerText = ele.innerText;
-            listInner = ele;
-          }
-        })
       }
+      const listChildren = Array.from(e.target.parentNode.childNodes);
+      listChildren.forEach(ele => {
+        if (ele.innerText !== 'edit' && ele.innerText !== 'delete') {
+          listInnerText = ele.innerText;
+          listInner = ele;
+        }
+      })
       toggleModal();
     })
   })
@@ -306,14 +352,14 @@ taskButton.addEventListener('click', async (event) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ taskInput })
+    body: JSON.stringify({ taskInput, currentList })
   });
 
   const data = await res.json();
   if (data.message === 'Success') {
 
     let taskUl = document.querySelector('.tasks_summary');
-    const newDivList = document.createElement("div");
+    const newDivList = document.createElement("li");
     const newDivText = document.createElement("div");
     newDivText.setAttribute('id', 'list-text');
     newDivText.classList.add('list-text');
