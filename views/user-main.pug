@@ -34,16 +34,15 @@ block content
     div(class="new-task")
     div(class="all-tasks")
 
-
   div(class='notepad-lines')
     div(class='add-task-div')
+      p(class='taks-p') Tasks
+      form(action="/tasks" class="form-task" method="post")
+        input(type="text" name="task" class="task-input")
+        button(type="submit" class="button-task") Add Task
       ul(class="tasks_summary")
-        p(class='taks-p') Tasks
-        form(action="/tasks" class="form-task" method="post")
-          input(type="text" name="task" class="task-input" placeHolder='Task name')
-          button(type="submit" class="button-task") Add Task
-          each task in tasksObj
-            li= task.task
+        each task in tasksObj
+          li= task.task
 
     div(class='line 1')
     div(class='line 2')
@@ -61,3 +60,4 @@ block content
     div(class='line 14')
     div(class='line 15')
     div(class='line 16')
+
