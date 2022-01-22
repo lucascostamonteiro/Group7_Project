@@ -9,19 +9,13 @@ append head
 block content
   h1(class='welcome') Welcome #{user.firstName}
 
-  button(class='modal-button') Create List
-  div(class='all-list-items')
-    ul(class="list_summary")
-      p(class='lists-p') Lists
-      each list in listsObj
-        li= list.name
 
   div(class='modal')
     div(class='modal-content')
       span(class='close-button')
       div(class="modal-title")
         p(class='firstP') Add List
-        p Please enter a new list name:
+        p(class='enter-list-name') Please enter a new list name:
         form(action=`/lists` method='post' class='modal-form')
           input(type='hidden' name='_csrf' value=csrfToken)
           input(type='text' class="input-list-name" placeHolder='List Name')
@@ -31,33 +25,40 @@ block content
 
 
   div(class="tasks-div")
-    div(class="new-task")
-    div(class="all-tasks")
+    ul(class="tasks_summary")
+      each task in tasksObj
+        li= task.task
 
-  div(class='notepad-lines')
     div(class='add-task-div')
-      p(class='taks-p') Tasks
+      p(class='task-p') Tasks
       form(action="/tasks" class="form-task" method="post")
         input(type="text" name="task" class="task-input")
         button(type="submit" class="button-task") Add Task
-      ul(class="tasks_summary")
-        each task in tasksObj
-          li= task.task
 
-    div(class='line 1')
-    div(class='line 2')
-    div(class='line 3')
-    div(class='line 4')
-    div(class='line 5')
-    div(class='line 6')
-    div(class='line 7')
-    div(class='line 8')
-    div(class='line 9')
-    div(class='line 10')
-    div(class='line 11')
-    div(class='line 12')
-    div(class='line 13')
-    div(class='line 14')
-    div(class='line 15')
-    div(class='line 16')
+  div(class='lists-task-lines')
+    div(class='list-div')
+        button(class='modal-button') Create List
+        div(class='all-list-items')
+          ul(class="list_summary")
+            p(class='lists-p') Lists
+            each list in listsObj
+              li(class='list-listItem')= list.name
 
+    div(class='notepad-lines')
+      //- div(class='task-lines')
+      div(class='line line1')
+      div(class='line line2')
+      div(class='line line3')
+      div(class='line line4')
+      div(class='line line5')
+      div(class='line line6')
+      div(class='line line7')
+      div(class='line line8')
+      div(class='line line9')
+      div(class='line line10')
+      div(class='line line11')
+      div(class='line line12')
+      div(class='line line13')
+      div(class='line line14')
+      div(class='line line15')
+      div(class='line line16')
