@@ -54,13 +54,14 @@ window.addEventListener("DOMContentLoaded", () => {
   let listEdit = Array.from(document.querySelectorAll('.list_summary > li > .list-edit'));
   listEdit.forEach(ele => {
     ele.addEventListener("click", (e) => {
-      let modalAddButton = document.querySelector('.add-list-button');
+      let modalAddButton = document.querySelector('.edit-task-button, .add-list-button, .edit-list-button');
       if (modalAddButton) {
         let modalAddP = document.querySelector('.firstP');
         modalAddP.innerHTML = 'Edit List'
         modalAddButton.innerHTML = 'Edit List';
         modalAddButton.setAttribute('class', 'edit-list-button');
         modalAddButton.removeEventListener('click', listPost);
+        modalAddButton.removeEventListener('click', taskPut);
         modalAddButton.addEventListener('click', listPut);
         const listChildren = Array.from(e.target.parentNode.childNodes);
         listChildren.forEach(ele => {
@@ -75,18 +76,21 @@ window.addEventListener("DOMContentLoaded", () => {
   })
 });
 
+
+
 function toggleModal() {
   modal.classList.toggle("show-modal");
 }
 
 modalButton.addEventListener("click", e => {
-  let modalAddButton = document.querySelector('.edit-list-button');
+  let modalAddButton = document.querySelector('.edit-task-button, .add-list-button, .edit-list-button');
   if (modalAddButton) {
     let modalAddP = document.querySelector('.firstP');
     modalAddP.innerHTML = 'Add List'
     modalAddButton.innerHTML = 'Add List';
     modalAddButton.setAttribute('class', 'add-list-button');
     modalAddButton.removeEventListener('click', listPut);
+    modalAddButton.removeEventListener('click', taskPut);
     modalAddButton.addEventListener('click', listPost);
   }
   toggleModal();
@@ -174,7 +178,7 @@ let listPost = async (event) => {
     newButtonDelete.style.padding = '5px';
     newButtonDelete.style.marginLeft = '5px';
     newButtonDelete.style.color = 'white';
-    newButtonDelete.style.backgroundColor =  'rgb(218, 67, 7)';
+    newButtonDelete.style.backgroundColor = 'rgb(218, 67, 7)';
     newButtonDelete.style.border = 'solid rgb(218, 67, 7) 1px';
     newButtonDelete.style.borderRadius = '5px'
 
@@ -196,6 +200,40 @@ let listPost = async (event) => {
 
 submitListButton.addEventListener('click', listPost);
 
+let taskPut = async (event) => {
+  const input = listInput.value;
+  event.stopPropagation();
+  event.preventDefault();
+  const res = await fetch('/tasks', {
+    method: "PUT",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ input, listInnerText })
+  });
+  const data = await res.json();
+  if (data.message === 'Success') {
+    toggleModal();
+    let listUl = document.querySelector('.tasks_summary');
+    const newDivList = document.createElement("div");
+    const newDivText = document.createElement("div");
+    newDivText.setAttribute('id', 'list-text');
+    newDivText.classList.add('list-text');
+    const newButtonEdit = document.createElement("button");
+    newButtonEdit.classList.add('list-text');
+    const newButtonDelete = document.createElement("button");
+    const divTextText = document.createTextNode(input);
+    newDivText.appendChild(divTextText);
+    const divButtonEdit = document.createTextNode('edit');
+    newButtonEdit.appendChild(divButtonEdit);
+    const divButtonDelete = document.createTextNode('delete');
+    newButtonDelete.appendChild(divButtonDelete);
+    newDivList.appendChild(newDivText);
+    newDivList.appendChild(newButtonEdit);
+    newDivList.appendChild(newButtonDelete);
+    listUl.replaceChild(newDivList, listInner.parentNode);
+  }
+}
 
 
 // TASKS
@@ -210,6 +248,31 @@ window.addEventListener("DOMContentLoaded", () => {
   taskDelete.forEach(ele => {
     ele.addEventListener("click", taskDeleter)
   })
+
+  let taskEdit = Array.from(document.querySelectorAll('.tasks_summary > li > .task-edit'));
+  taskEdit.forEach(ele => {
+    ele.addEventListener("click", (e) => {
+      let modalAddButton = document.querySelector('.edit-task-button, .add-list-button, .edit-list-button');
+      if (modalAddButton) {
+        let modalAddP = document.querySelector('.firstP');
+        modalAddP.innerHTML = 'Edit Task'
+        modalAddButton.innerHTML = 'Edit Task';
+        modalAddButton.setAttribute('class', 'edit-task-button');
+        modalAddButton.removeEventListener('click', listPost);
+        modalAddButton.removeEventListener('click', listPut);
+        modalAddButton.addEventListener('click', taskPut);
+        const listChildren = Array.from(e.target.parentNode.childNodes);
+        listChildren.forEach(ele => {
+          if (ele.innerText !== 'edit' && ele.innerText !== 'delete') {
+            listInnerText = ele.innerText;
+            listInner = ele;
+          }
+        })
+      }
+      toggleModal();
+    })
+  })
+
 });
 
 let taskDeleter = async (event) => {

@@ -12,8 +12,7 @@ const router = express.Router();
 router.post('/', asyncHandler(async (req, res, next) => {
     const userId = await req.session.user.userId;
     const task = req.body.taskInput;
-    console.log('DEBUGGGG')
-    const taskCreate = await db.Task.create({
+    await db.Task.create({
         task,
         user_id: userId,
         list_id: '1',
@@ -39,6 +38,30 @@ router.delete('/', asyncHandler(async (req, res, next) => {
   res.json({ message: 'Success' })
 }))
 
+router.put('/', asyncHandler(async (req, res, next) => {
+  const userId = await req.session.user.userId;
+  const task = req.body.input;
+  const target = req.body.listInnerText;
+
+  await db.Task.destroy({
+    where: {
+      task: {
+        [Op.eq]: target
+      }
+    }
+  });
+
+  await db.Task.create({
+    task,
+    user_id: userId,
+    list_id: '1',
+    completed: false,
+    expected_completion: new Date(),
+    actual_completion: new Date()
+});
+
+  res.json({ message: 'Success' })
+}))
 
 
 
