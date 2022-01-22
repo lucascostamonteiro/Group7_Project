@@ -1,5 +1,6 @@
 * {
     background-color: #bfd8f5;
+    font-family: 'Nunito';
 }
 
 .modal {
@@ -34,16 +35,6 @@
     font-family: 'Nunito';
 }
 
-/* .close-button {
-    float: right;
-    width: 1.5rem;
-    line-height: 1.5rem;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 0.25rem;
-    background-color: lightgray;
-} */
-
 .show-modal {
     opacity: 1;
     visibility: visible;
@@ -66,72 +57,13 @@
     width: 70px;
 }
 
-.modal-content-buttons {
-    padding: 15px 15px;
-}
-
-.cancel-button {
-    margin-left: 10px;
-    padding: 5px;
-    min-width: 70px;
-}
-
-.add-list-button {
-    margin-right: 10px;
-    padding: 5px;
-    min-width: 70px;
-}
-
-.input-list-name {
-    padding: 5px 6px;
-}
-
-.modal-title {
-    padding-bottom: 10px;
-}
-
-#list-text {
-    padding: 5px;
-    margin-left: 10px;
-}
-
-.list-edit, .list-delete {
-    padding: 5px;
-    margin-left: 5px;
-    color: white;
-    border-radius: 5px;
-}
-
-.list-edit {
-    background-color: #009DFF;
-    border: solid #009DFF 1px;
-}
-
-.list-delete {
-    background-color: rgb(218, 67, 7);
-    border: solid rgb(218, 67, 7) 1px;
-}
-
-.all-list-items {
-    margin-left: 10px;
-    width: 50%;
-}
-
 .modal-button {
     padding: 5px;
+    width: 100px;
     background-color: white;
-    margin-left: 20px;
-    margin-top: 10px;
     color: #009DFF;
     border: solid #009DFF 2px;
     border-radius: 5px;
-}
-
-.bread-pic {
-    display: flex;
-    flex-direction: row;
-    padding: 20px;
-
 }
 
 .nav-bar-div {
@@ -139,6 +71,17 @@
     flex-direction: row;
     justify-content: space-around;
     border-bottom: solid rgba(0, 0, 0, 0.048) 1px;
+}
+
+.bread-pic {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+}
+
+.buttons li {
+    list-style-type: none;
+    margin-top: 60px;
 }
 
 .log-out {
@@ -149,14 +92,58 @@
     padding: 10px;
 }
 
-.buttons li {
-    list-style-type: none;
-    margin-top: 60px;
-}
-
-.welcome {
+h1 {
+    display: block;
     text-align: center;
     font-family: 'Nunito';
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+.tasks-div {
+    margin-top: -50px;
+}
+
+.add-task-div {
+    display: inline;
+    text-align: center;
+    margin-left: 250px;
+}
+
+.task-p {
+    font-size: 20px;
+}
+
+.task-input {
+    border-radius: 5px;
+    background-color: white;
+}
+
+.form-task {
+    margin-top: -20px;
+}
+
+.button-task {
+    padding: 5px;
+    width: 100px;
+    background-color: white;
+    margin-top: 10px;
+    color: #009DFF;
+    border: solid #009DFF 2px;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+.list-div {
+    margin-left: 40px;
+    display: block;
+    position: absolute;
+    width: fit-content;
+
+}
+
+.lists-p {
+    font-size: 20px;
     font-weight: bolder;
 }
 
@@ -165,27 +152,33 @@
     width: 150px;
 }
 
-.form-task {
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-    margin-left: 300px;
-}
-
-.task-input {
-    margin-left: 15px;
-    border-radius: 5px;
-}
-
-.button-task {
+.list-edit, .list-delete, .task-edit, .task-delete {
     padding: 5px;
-    width: 100px;
-    background-color: white;
-    margin-left: 100px;
-    margin-top: 10px;
-    color: #009DFF;
-    border: solid #009DFF 2px;
+    margin-left: 5px;
+    color: white;
     border-radius: 5px;
+}
+
+.list-edit, .task-edit {
+    background-color: #009DFF;
+    border: solid #009DFF 1px;
+}
+
+.list-delete, .task-delete {
+    background-color: rgb(218, 67, 7);
+    border: solid rgb(218, 67, 7) 1px;
+}
+
+.tasks_summary {
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.list-task-lines {
+    display: flex;
+    flex-direction: row;
 }
 
 .notepad-lines {
@@ -196,23 +189,69 @@
     justify-content: flex-start;
     margin: 0 auto;
     width: 50%;
-    margin-top: -250px;
     left: 25%;
+    padding: 20px;
 }
 
 .line {
     background-color: white;
-    position: absolute;
     width: 100%;
     margin-bottom: 1px;
     padding: 20px;
     border: dashed grey 1px;
 }
 
-.all-tasks {
-    width: 100px;
+.list-listItem {
+    margin-bottom: 5px;
+    list-style: none;
 }
 
-.tasks-div {
-    width: 200px;
+.firstP {
+    background-color: white;
+}
+
+.modal-form {
+    background-color: white;
+}
+
+.cancel-button {
+    margin-left: 10px;
+    padding: 5px;
+    min-width: 70px;
+    background-color: white;
+}
+
+.add-list-button {
+    margin-left: 10px;
+    padding: 5px;
+    min-width: 70px;
+    background-color: white;
+}
+
+.input-list-name {
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 5px;
+    background-color: white;
+    margin-left: 12px;
+}
+
+.enter-list-name {
+    background-color: white;
+}
+
+.modal-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content-buttons {
+    display: flex;
+    padding: 10px;
+    flex-direction: row;
+    justify-content: space-between;
 }

@@ -161,6 +161,7 @@ let listPost = async (event) => {
 
     let listUl = document.querySelector('.list_summary');
     const newDivList = document.createElement("div");
+    newDivList.setAttribute('class', 'list-name-container')
     const newDivText = document.createElement("div");
     newDivText.setAttribute('id', 'list-text');
     newDivText.classList.add('list-text');
@@ -232,6 +233,7 @@ let taskPut = async (event) => {
     newDivList.appendChild(newButtonEdit);
     newDivList.appendChild(newButtonDelete);
     listUl.replaceChild(newDivList, listInner.parentNode);
+
   }
 }
 
@@ -318,7 +320,7 @@ taskButton.addEventListener('click', async (event) => {
     newDivText.setAttribute('id', 'list-text');
     newDivText.classList.add('list-text');
     const newButtonEdit = document.createElement("button");
-    newButtonEdit.classList.add('list-text');
+    // newButtonEdit.classList.add('list-text');
     const newButtonDelete = document.createElement("button");
     const divTextText = document.createTextNode(taskInput);
     newDivText.appendChild(divTextText);
@@ -332,5 +334,21 @@ taskButton.addEventListener('click', async (event) => {
     taskUl.appendChild(newDivList);
     newButtonEdit.addEventListener('click', taskPut); // TO DO
     newButtonDelete.addEventListener('click', taskDeleter); // TO DO
+
+    newButtonEdit.style.padding = '5px';
+    newButtonEdit.style.marginLeft = '5px';
+    newButtonEdit.style.color = 'white';
+    newButtonEdit.style.backgroundColor = '#009DFF';
+    newButtonEdit.style.border = 'solid #009DFF 1px';
+    newButtonEdit.style.borderRadius = '5px'
+    // newButtonEdit.classList.add('list-text');
+
+    newButtonDelete.style.padding = '5px';
+    newButtonDelete.style.marginLeft = '5px';
+    newButtonDelete.style.color = 'white';
+    newButtonDelete.style.backgroundColor = 'rgb(218, 67, 7)';
+    newButtonDelete.style.border = 'solid rgb(218, 67, 7) 1px';
+    newButtonDelete.style.borderRadius = '5px'
+
   }
 });
