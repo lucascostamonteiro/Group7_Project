@@ -12,9 +12,9 @@ block content
   button(class='modal-button') Create List
   div(class='all-list-items')
     ul(class="list_summary")
+      p(class='lists-p') Lists
       each list in listsObj
         li= list.name
-
 
   div(class='modal')
     div(class='modal-content')
@@ -29,6 +29,7 @@ block content
             button(type='submit' class='add-list-button') Add List
             button(class='cancel-button') Cancel
 
+
   div(class="tasks-div")
     div(class="new-task")
       form(action="/tasks" class="form-task" method="post")
@@ -37,5 +38,7 @@ block content
 
     div(class="all-tasks")
       ul(class="tasks_summary")
-        each task in tasksObj
-          li= task.task
+        p(class='taks-p') Tasks
+          each task in tasksObj
+            li= task.task
+

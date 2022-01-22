@@ -113,6 +113,7 @@
 
 .all-list-items {
     margin-left: 10px;
+    width: 50%;
 }
 
 .modal-button {
@@ -159,5 +160,5 @@
 
 .list-text {
     display: inline-block;
-    width: 15%;
+    width: 20%;
 }
