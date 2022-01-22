@@ -32,12 +32,11 @@ block content
 
   div(class="tasks-div")
     div(class="new-task")
-      form(action="/tasks" class="form-task" method="post")
-        input(type="text" name="task" class="task-input")
-        button(type="submit" class="button-task") Add Task
-
     div(class="all-tasks")
       ul(class="tasks_summary")
-        p(class='tasks-p') Tasks
-        each task in tasksObj
-          li= task.task
+        p(class='taks-p') Tasks
+        form(action="/tasks" class="form-task" method="post")
+          input(type="text" name="task" class="task-input")
+          button(type="submit" class="button-task") Add Task
+          each task in tasksObj
+            li= task.task
