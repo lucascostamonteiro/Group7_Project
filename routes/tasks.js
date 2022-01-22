@@ -25,7 +25,19 @@ router.post('/', asyncHandler(async (req, res, next) => {
     res.json({ message: 'Success' })
 }))
 
+router.delete('/', asyncHandler(async (req, res, next) => {
+  const target = req.body.listInnerText;
 
+  await db.Task.destroy({
+    where: {
+      task: {
+        [Op.eq]: target
+      }
+    }
+  });
+
+  res.json({ message: 'Success' })
+}))
 
 
 
