@@ -14,7 +14,7 @@ router.post('/', asyncHandler(async (req, res, next) => {
     const userId = await req.session.user.userId;
     const name = req.body.input;
 
-    const listCreate = await db.List.create({
+    await db.List.create({
       name,
       user_id: userId,
       completed: false
@@ -28,14 +28,6 @@ router.put('/', asyncHandler(async (req, res, next) => {
   const name = req.body.input;
   const target = req.body.listInnerText;
 
-  let toDestroy = await db.List.findAll({
-    where: {
-      name: {
-        [Op.eq]: target
-      }
-    }
-  });
-
   await db.List.destroy({
     where: {
       name: {
@@ -44,7 +36,7 @@ router.put('/', asyncHandler(async (req, res, next) => {
     }
   });
 
-  const listCreate = await db.List.create({
+  await db.List.create({
     name,
     user_id: userId,
     completed: false
