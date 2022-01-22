@@ -203,9 +203,37 @@ submitListButton.addEventListener('click', listPost);
 window.addEventListener("DOMContentLoaded", () => {
   let allTasks = Array.from(document.querySelectorAll('.tasks_summary > li'));
   allTasks.forEach(ele => {
-    ele.innerHTML = `<div id='list-text' class='list-text'>${ele.innerHTML}</div><button class='list-edit'>edit</button><button class ='list-delete'>delete</button>`
+    ele.innerHTML = `<div id='list-text' class='list-text'>${ele.innerHTML}</div><button class='task-edit'>edit</button><button class ='task-delete'>delete</button>`
+  })
+
+  let taskDelete = Array.from(document.querySelectorAll('.tasks_summary > li > .task-delete'));
+  taskDelete.forEach(ele => {
+    ele.addEventListener("click", taskDeleter)
   })
 });
+
+let taskDeleter = async (event) => {
+  const listChildren = Array.from(event.target.parentNode.childNodes);
+  listChildren.forEach(ele => {
+    if (ele.innerText !== 'edit' && ele.innerText !== 'delete') {
+      listInnerText = ele.innerText;
+      listInner = ele;
+    }
+  })
+  const res = await fetch('/tasks', {
+    method: "DELETE",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ listInnerText })
+  });
+  const data = await res.json();
+  if (data.message === 'Success') {
+    let taskUl = document.querySelector('.tasks_summary');
+    taskUl.removeChild(listInner.parentNode);
+  }
+}
+
 const taskButton = document.querySelector('.button-task');
 taskButton.addEventListener('click', async (event) => {
   event.preventDefault();
