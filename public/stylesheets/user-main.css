@@ -15,6 +15,7 @@
     background-color: rgba(0, 0, 0, 0.5);
     opacity: 0;
     visibility: hidden;
+    z-index: 3;
 }
 
 .modal-content {
@@ -168,6 +169,7 @@
     display: flex;
     flex-direction: column;
     width: 200px;
+    margin-left: 300px;
 }
 
 .task-input {
@@ -184,4 +186,33 @@
     color: #009DFF;
     border: solid #009DFF 2px;
     border-radius: 5px;
+}
+
+.notepad-lines {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 auto;
+    width: 50%;
+    margin-top: -250px;
+    left: 25%;
+}
+
+.line {
+    background-color: white;
+    position: absolute;
+    width: 100%;
+    margin-bottom: 1px;
+    padding: 20px;
+    border: dashed grey 1px;
+}
+
+.all-tasks {
+    width: 100px;
+}
+
+.tasks-div {
+    width: 200px;
 }
