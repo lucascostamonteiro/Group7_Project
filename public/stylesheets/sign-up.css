@@ -2,6 +2,7 @@ ul {
   display: flex;
   flex-direction: row;
   list-style: none;
+  justify-content: space-evenly;
 }
 
 .buttons li {
@@ -15,6 +16,7 @@ ul {
   border-radius: 5px;
   margin-top: 5px;
 }
+
 
 .buttons a {
   text-decoration: none;
@@ -43,6 +45,7 @@ ul {
 
 .form-div {
   padding: 10px;
+  margin-left: -90px;
   display: flex;
   justify-content: end;
   align-items: center;
@@ -50,10 +53,6 @@ ul {
   height: auto;
 }
 
-.errors-form-div {
-  width: 50%;
-
-}
 
 form {
   margin-top: 110px;
@@ -71,6 +70,7 @@ form input {
   border: solid rgba(0, 0, 0, 0.363) 1px;
   border-radius: 5px;
   color: black;
+  width: 450px;
 }
 
 
@@ -84,6 +84,7 @@ form button {
   text-align: center;
   font-family: 'Nunito';
   border-radius: 5px;
+  width: 470px;
 }
 
 form a {
@@ -239,4 +240,10 @@ main {
   width: 100%;
   margin-top: 80px;
   background: #0060BF;
+}
+
+
+.error-text {
+  color: red;
+  font-weight: 450;
 }

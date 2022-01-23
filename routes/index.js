@@ -35,14 +35,14 @@ const userValidators = [
     .exists({ checkFalsy: true })
     .withMessage('Please provide a value for Email Address')
     .isLength({ max: 255 })
-    .withMessage('Email Address must not be more than 255 characters long')
+    .withMessage('Email address must not be more than 255 characters long')
     .isEmail()
-    .withMessage('Email Address is not a valid email')
+    .withMessage('Email address is not a valid email')
     .custom((value) => {
       return db.User.findOne({ where: { email: value } })
         .then((user) => {
           if (user) {
-            return Promise.reject('The provided Email Address is already in use by another account');
+            return Promise.reject('The provided Email address is already in use by another account');
           }
         });
     }),
@@ -110,12 +110,18 @@ router.post('/sign-up', csrfProtection, userValidators, asyncHandler(async (req,
     res.redirect(`/${user.id}`);
   } else {
     const errors = validatorErrors.array().map((error) => error.msg);
-    res.render('sign-up', {
-      title: 'Sign-Up',
-      user,
-      errors,
-      csrfToken: req.csrfToken()
-    });
+    if (errors.length > 0) {
+      res.render('sign-up', {
+        title: 'Sign-Up',
+        body: req.body,
+        errors,
+        firstName,
+        lastName,
+        email,
+        csrfToken: req.csrfToken()
+      });
+      return
+    }
   }
 }));
 
@@ -126,20 +132,18 @@ router.post('/log-in', csrfProtection, loginValidators, asyncHandler(async (req,
   const validatorErrors = validationResult(req);
 
   if (validatorErrors.isEmpty()) {
-    // Attempt to get the user by their email address.
     const user = await db.User.findOne({ where: { email } });
 
     if (user !== null) {
 
-      // const passwordMatch = await bcrypt.compare(password, user.password.toString()); // THIS IS COMMENTED OUT FOR TESTING
-      // if (passwordMatch) {
+      const passwordMatch = await bcrypt.compare(password, user.password.toString());
+      if (passwordMatch) {
 
-      req.session.user = { userId: user.id, email: user.email }
+        req.session.user = { userId: user.id, email: user.email }
 
-      return res.redirect(`/${user.id}`);
-      // }
+        return res.redirect(`/${user.id}`);
+      }
     }
-    // Otherwise display an error message to the user.
     errors.push('Login failed');
   } else {
     errors = validatorErrors.array().map((error) => error.msg);
