@@ -135,11 +135,10 @@ h1 {
 }
 
 .list-div {
-    margin-left: 40px;
+    margin-left: 80px;
     display: block;
     position: absolute;
     width: fit-content;
-
 }
 
 .lists-p {
@@ -191,6 +190,10 @@ h1 {
     width: 50%;
     left: 25%;
     padding: 20px;
+}
+
+.line1, .line16 {
+    border-radius: 5px;
 }
 
 .line {
