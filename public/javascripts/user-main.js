@@ -410,7 +410,8 @@ let taskDeleter = async (event) => {
 const taskButton = document.querySelector('.button-task');
 taskButton.addEventListener('click', async (event) => {
   event.preventDefault();
-  const taskInput = document.querySelector('.task-input').value;
+  let taskEntry = document.querySelector('.task-input');
+  let taskInput = taskEntry.value;
   const res = await fetch('/tasks', {
     method: "POST",
     headers: {
@@ -463,5 +464,6 @@ taskButton.addEventListener('click', async (event) => {
     newButtonDelete.style.backgroundColor = 'rgb(218, 67, 7)';
     newButtonDelete.style.border = 'solid rgb(218, 67, 7) 1px';
     newButtonDelete.style.borderRadius = '5px'
+    taskEntry.value = '';
   }
 });
