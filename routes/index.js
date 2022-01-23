@@ -66,6 +66,14 @@ const userValidators = [
     }),
 ];
 
+router.use((req, res, next) => {
+  if (req.session.user) {
+    res.redirect(`/${req.session.user.userId}`)
+  } else {
+    next()
+  }
+})
+
 /* GET home page. */
 router.get('/', (req, res) => {
   res.render('index');
