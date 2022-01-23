@@ -14,7 +14,7 @@ router.post('/', asyncHandler(async (req, res, next) => {
   const task = req.body.taskInput;
   const myList = req.body.currentList;
 
-  if (myList === 'allTasks') {
+  if (myList === 'All Tasks') {
     listId = 0;
   } else {
     listId = await db.List.findOne({
@@ -60,7 +60,7 @@ router.put('/', asyncHandler(async (req, res, next) => {
 
   let listId;
 
-  if (myList === 'allTasks') {
+  if (myList === 'All Tasks') {
     listId = 0;
   } else {
     listId = await db.List.findOne({

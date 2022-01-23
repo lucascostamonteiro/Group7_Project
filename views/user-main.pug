@@ -41,6 +41,7 @@ block content
         div(class='all-list-items')
           ul(class="list_summary")
             p(class='lists-p') Lists
+            li(class='allTasks' style={background: 'grey', opacity: '.6', padding: '5px', "border-radius": '10px'}) All Tasks
             each list in listsObj
               li(class='list-listItem')= list.name
 

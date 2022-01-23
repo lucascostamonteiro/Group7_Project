@@ -66,6 +66,13 @@ const userValidators = [
     }),
 ];
 
+router.get('/log-out', (req, res) => {
+  delete req.session.user;
+  req.session.save(() => {
+    res.redirect('/')
+  })
+})
+
 router.use((req, res, next) => {
   if (req.session.user) {
     res.redirect(`/${req.session.user.userId}`)
@@ -145,14 +152,6 @@ router.post('/log-in', csrfProtection, loginValidators, asyncHandler(async (req,
     csrfToken: req.csrfToken(),
   });
 }));
-
-router.get('/log-out', (req, res) => {
-  delete req.session.user;
-  req.session.save(() => {
-    res.redirect('/')
-  })
-})
-
 
 router.post('/demo', asyncHandler(async (req, res) => {
   req.session.user = { userId: 1, email: "alec@alec.alec" }
