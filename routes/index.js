@@ -110,12 +110,18 @@ router.post('/sign-up', csrfProtection, userValidators, asyncHandler(async (req,
     res.redirect(`/${user.id}`);
   } else {
     const errors = validatorErrors.array().map((error) => error.msg);
-    res.render('sign-up', {
-      title: 'Sign-Up',
-      user,
-      errors,
-      csrfToken: req.csrfToken()
-    });
+    if (errors.length > 0) {
+      res.render('sign-up', {
+        title: 'Sign-Up',
+        body: req.body,
+        errors,
+        firstName,
+        lastName,
+        email,
+        csrfToken: req.csrfToken()
+      });
+      return
+    }
   }
 }));
 

@@ -8,67 +8,60 @@ html
     include utils.pug
   body
     div(class='right-side')
+      ul(class='buttons')
+        if !locals.authenticated
+          li: a(class="login-button" href="/log-in") Log in
+        if locals.authenticated
+          li: a(href="/log-out") Logout
       div(class="form-div")
-        ul(class='buttons')
-          if !locals.authenticated
-            li: a(class="login-button" href="/log-in") Log in
-          if locals.authenticated
-            li: a(href="/log-out") Logout
-      //- div(class="errors-form-div")
-      //-   if (errors.length > 0)
-      //-           p The following error(s) occurred:
-      //-           ul
-      //-               each error in errors
-      //-                   li= error
-      div(class="form-div")
-          form(action="/sign-up" method="post")
-              div(class='sign-up-sentence') Sign up for free.
-              input(type="hidden" name="_csrf" value=csrfToken)
-              input(class="input-box-error" type="text" name="firstName" placeholder='First Name')
-              div(class="error-msg")
-                each error in errors
-                  -if(error.includes("Please provide a value for First Name"))
-                    p(class="error-text")= error
-                  -if(error.includes("First Name must not be more than 50 characters long"))
-                    p(class="error-text")= error
-              input(class="input-box-error" type="text" name="lastName" placeholder='Last Name')
-              div(class="error-msg")
-                each error in errors
-                  -if(error.includes("Please provide a value for Last Name"))
-                    p(class="error-text")= error
-                  -if(error.includes("Last Name must not be more than 50 characters long"))
-                    p(class="error-text")= error
-              input(class="input-box-error" type="text" name="email" placeholder="Email")
-              div(class="error-msg")
-                each error in errors
-                  -if(error.includes("Please provide a value for Email address"))
-                    p(class="error-text")= error
-                  -if(error.includes("Email address must not be more than 255 characters long"))
-                    p(class="error-text")= error
-                  -if(error.includes("Email address is not a valid email"))
-                    p(class="error-text")= error
-                  -if(error.includes("The provided Email address is already in use by another account"))
-                    p(class="error-text")= error
-              input(class="input-box-error" type="password" name="password" placeholder='Password')
-              div(class="error-msg")
-                each error in errors
-                  -if(error.includes("Please provide a value for Password"))
-                    p(class="error-text")= error
-                  -if(error.includes("Password must not be more than 50 characters long"))
-                    p(class="error-text")= error
-                  -if(error.includes("Password must contain at least 1 lowercase letter, uppercase letter, number, and special character"))
-                    p(class="error-text")= error
-                  -if(error.includes("Password must not be more than 50 characters long"))
-                    p(class="error-text")= error
-              input(class="input-box-error" type="password" name="confirmPassword" placeholder='Confirm Password')
-              div(class="error-msg")
-                each error in errors
-                  -if(error.includes("Please provide a value for Confirm Password"))
-                    p(class="error-text")= error
-                  -if(error.includes("Confirm Password must not be more than 50 characters long"))
-                    p(class="error-text")= error
-                  -if(error.includes("Confirm Password does not match Password"))
-                    p(class="error-text")= error
+        form(action="/sign-up" method="post")
+            div(class='sign-up-sentence') Sign up for free.
+            input(type="hidden" name="_csrf" value=csrfToken)
+            input(class="input-box-error" type="text" name="firstName" placeholder='First Name')
+            div(class="error-msg")
+              each error in errors
+                -if(error.includes("Please provide a value for First Name"))
+                  p(class="error-text")= error
+                -if(error.includes("First Name must not be more than 50 characters long"))
+                  p(class="error-text")= error
+            input(class="input-box-error" type="text" name="lastName" placeholder='Last Name')
+            div(class="error-msg")
+              each error in errors
+                -if(error.includes("Please provide a value for Last Name"))
+                  p(class="error-text")= error
+                -if(error.includes("Last Name must not be more than 50 characters long"))
+                  p(class="error-text")= error
+            input(class="input-box-error" type="text" name="email" placeholder="Email")
+            div(class="error-msg")
+              each error in errors
+                -if(error.includes("Please provide a value for Email address"))
+                  p(class="error-text")= error
+                -if(error.includes("Email address must not be more than 255 characters long"))
+                  p(class="error-text")= error
+                -if(error.includes("Email address is not a valid email"))
+                  p(class="error-text")= error
+                -if(error.includes("The provided Email address is already in use by another account"))
+                  p(class="error-text")= error
+            input(class="input-box-error" type="password" name="password" placeholder='Password')
+            div(class="error-msg")
+              each error in errors
+                -if(error.includes("Please provide a value for Password"))
+                  p(class="error-text")= error
+                -if(error.includes("Password must not be more than 50 characters long"))
+                  p(class="error-text")= error
+                -if(error.includes("Password must contain at least 1 lowercase letter, uppercase letter, number, and special character"))
+                  p(class="error-text")= error
+                -if(error.includes("Password must not be more than 50 characters long"))
+                  p(class="error-text")= error
+            input(class="input-box-error" type="password" name="confirmPassword" placeholder='Confirm Password')
+            div(class="error-msg")
+              each error in errors
+                -if(error.includes("Please provide a value for Confirm Password"))
+                  p(class="error-text")= error
+                -if(error.includes("Confirm Password must not be more than 50 characters long"))
+                  p(class="error-text")= error
+                -if(error.includes("Confirm Password does not match Password"))
+                  p(class="error-text")= error
 
               button(type="submit") Sign-Up!
 

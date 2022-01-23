@@ -8,26 +8,32 @@ html
     script(src="/javascripts/sign-up.js" type="module" defer)
   body
     div(class='right-side')
+      ul(class='buttons')
+        if !locals.authenticated
+          li: a(class="sign-button" href="/sign-up") Sign up for free
+        if locals.authenticated
+          li: a(href="/log-out") Logout
       div(class="form-div")
-        ul(class='buttons')
-          if !locals.authenticated
-            li: a(class="sign-button" href="/sign-up") Sign up for free
-          if locals.authenticated
-            li: a(href="/log-out") Logout
       div(class='sign-up-sentence')
-        if (errors.length > 0)
-          div(class='errors-div' role='alert')
-            p The following error(s) occurred:
-            ul
-              each error in errors
-                li= error
         form(action="/log-in" method="post")
           div(class="login-sentence") Been here before? Welcome back!
           input(type="hidden" name="_csrf" value=csrfToken)
           label(for="email")
           input(type="text" name="email" placeholder="Email")
+          div(class="error-msg")
+            each error in errors
+              -if(error.includes("Please provide an email address"))
+                p(class="error-text")= error
+          div(class="error-msg")
+            each error in errors
+              -if(error.includes("Email Address is not a valid email"))
+                p(class="error-text")= error
           label(for="password")
           input(type="password" name="password" placeholder="Password")
+          div(class="error-msg")
+            each error in errors
+              -if(error.includes("Please provide a password"))
+                p(class="error-text")= error
           button(type="submit") Login
 
     main(class='left-side')
