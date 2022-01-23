@@ -259,7 +259,6 @@ let taskPut = async (event) => {
   const data = await res.json();
   if (data.message === 'Success') {
     toggleModal();
-    let taskUl = document.querySelector('.tasks_summary');
     const newDivList = document.createElement("li");
     const newDivText = document.createElement("div");
     newDivText.setAttribute('id', 'list-text');
@@ -276,7 +275,7 @@ let taskPut = async (event) => {
     newDivList.appendChild(newDivText);
     newDivList.appendChild(newButtonEdit);
     newDivList.appendChild(newButtonDelete);
-    taskUl.replaceChild(newDivList, listInner.parentNode);
+    listInner.parentNode.parentNode.replaceChild(newDivList, listInner.parentNode);
     newButtonEdit.addEventListener('click', taskPut);
     newButtonDelete.addEventListener('click', taskDeleter);
   }
@@ -290,7 +289,6 @@ const taskDivs = Array.from(document.querySelectorAll('.line'));
 window.addEventListener("DOMContentLoaded", () => {
   let allTasks = Array.from(document.querySelectorAll('.tasks_summary > li'));
   allTasks.forEach(ele => {
-    console.log(ele)
     ele.innerHTML = `<div id='list-text' class='list-text'>${ele.innerHTML}</div><button class='task-edit'>edit</button><button class ='task-delete'>delete</button>`;
     for (let i = taskDivs.length-1; i > 0; i--) {
       if (!taskDivs[i].hasChildNodes()) {
@@ -300,12 +298,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
   })
 
-  let taskDelete = Array.from(document.querySelectorAll('.tasks_summary > li > .task-delete'));
+  let taskDelete = Array.from(document.querySelectorAll('.notepad-lines > div > li > .task-delete'));
   taskDelete.forEach(ele => {
     ele.addEventListener("click", taskDeleter)
   })
 
-  let taskEdit = Array.from(document.querySelectorAll('.tasks_summary > li > .task-edit'));
+  let taskEdit = Array.from(document.querySelectorAll('.notepad-lines > div > li > .task-edit'));
   taskEdit.forEach(ele => {
     ele.addEventListener("click", (e) => {
       let modalAddButton = document.querySelector('.edit-task-button, .add-list-button, .edit-list-button');
@@ -332,6 +330,7 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 let taskDeleter = async (event) => {
+  console.log('heyo!!!')
   const listChildren = Array.from(event.target.parentNode.childNodes);
   listChildren.forEach(ele => {
     if (ele.innerText !== 'edit' && ele.innerText !== 'delete') {
@@ -348,8 +347,8 @@ let taskDeleter = async (event) => {
   });
   const data = await res.json();
   if (data.message === 'Success') {
-    let taskUl = document.querySelector('.tasks_summary');
-    taskUl.removeChild(listInner.parentNode);
+    let taskUl = document.querySelector('.notepad-lines');
+    listInner.parentNode.parentNode.removeChild(listInner.parentNode);
   }
 }
 
