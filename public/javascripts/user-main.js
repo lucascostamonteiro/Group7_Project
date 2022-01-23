@@ -329,7 +329,7 @@ window.addEventListener("DOMContentLoaded", () => {
   let allTasks = Array.from(document.querySelectorAll('.tasks_summary > li'));
   allTasks.forEach(ele => {
     ele.innerHTML = `<div id='list-text' class='list-text'>${ele.innerHTML}</div><button class='task-edit'>edit</button><button class ='task-delete'>delete</button>`;
-    for (let i = taskDivs.length-1; i > 0; i--) {
+    for (let i = taskDivs.length-1; i >= 0; i--) {
       if (!taskDivs[i].hasChildNodes()) {
         taskDivs[i].appendChild(ele);
       }
