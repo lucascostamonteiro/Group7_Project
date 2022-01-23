@@ -6,7 +6,7 @@ const submitListButton = document.querySelector('.add-list-button');
 const listInput = document.querySelector('.input-list-name');
 let listInnerText = '';
 let listInner;
-let currentList = 'allTasks';
+let currentList = 'All Tasks';
 
 
 // LISTS
@@ -35,10 +35,13 @@ let listDeleter = async (event) => {
 
 
 window.addEventListener("DOMContentLoaded", () => {
-  let allLists = Array.from(document.querySelectorAll('.list_summary > li'));
+  let allLists = Array.from(document.querySelectorAll('.list-listItem'));
   allLists.forEach(ele => {
     ele.innerHTML = `<div id='list-text' class='list-text'>${ele.innerHTML}</div><button class='list-edit'>edit</button><button class ='list-delete'>delete</button>`
   });
+
+  let allTaskList = document.querySelector('.allTasks');
+  allTaskList.addEventListener("click", listGet);
 
   let listText = Array.from(document.querySelectorAll('.list_summary > li > div'));
   listText.forEach(ele => {
@@ -75,10 +78,38 @@ window.addEventListener("DOMContentLoaded", () => {
   })
 });
 
+let returnCurrentListNode = function (currentList) {
+  let allNormalLi = Array.from(document.querySelectorAll('li > div'));
+  let nodeToReturn;
+  allNormalLi.forEach(ele => {
+    if (ele.innerText === currentList) {
+      nodeToReturn = ele;
+    }
+  })
+  let allTasksLi = document.querySelector('.allTasks')
+  if (allTasksLi.innerText === currentList) {
+    nodeToReturn = allTasksLi
+  }
+  return nodeToReturn;
+}
 
 let listGet = async (event) => {
+
+  let currentListNode = returnCurrentListNode(currentList);
+  currentListNode.style.background = null;
+  currentListNode.style.opacity = null;
+  currentListNode.style.padding = null;
+  currentListNode.style.borderRadius = null;
+
   let listName = event.target.innerText;
   currentList = listName;
+
+  currentListNode = returnCurrentListNode(currentList);
+  currentListNode.style.background = 'grey';
+  currentListNode.style.opacity = '.6';
+  currentListNode.style.padding = '5px';
+  currentListNode.style.borderRadius = '10px';
+
   let res = await fetch('/lists/allLists', {
     method: "POST",
     headers: {
@@ -112,7 +143,13 @@ let listGet = async (event) => {
     newDivList.appendChild(newDivText);
     newDivList.appendChild(newButtonEdit);
     newDivList.appendChild(newButtonDelete);
-    taskUl.appendChild(newDivList);
+    let count = 0;
+    taskUl.forEach(ele => {
+      if (!ele.firstChild && count === 0) {
+        ele.prepend(newDivList)
+        count++
+      }
+    })
     newButtonEdit.addEventListener('click', taskPut); // TO DO
     newButtonDelete.addEventListener('click', taskDeleter); // TO DO
   })
@@ -330,7 +367,6 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 let taskDeleter = async (event) => {
-  console.log('heyo!!!')
   const listChildren = Array.from(event.target.parentNode.childNodes);
   listChildren.forEach(ele => {
     if (ele.innerText !== 'edit' && ele.innerText !== 'delete') {
@@ -347,7 +383,6 @@ let taskDeleter = async (event) => {
   });
   const data = await res.json();
   if (data.message === 'Success') {
-    let taskUl = document.querySelector('.notepad-lines');
     listInner.parentNode.parentNode.removeChild(listInner.parentNode);
   }
 }
@@ -366,8 +401,6 @@ taskButton.addEventListener('click', async (event) => {
 
   const data = await res.json();
   if (data.message === 'Success') {
-
-    const taskListItem = document.querySelector('.task-list-item');
     let taskUl = document.querySelector('.tasks_summary');
     const newDivList = document.createElement("li");
     const newDivText = document.createElement("div");

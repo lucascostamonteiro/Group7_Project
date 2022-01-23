@@ -21,16 +21,27 @@ router.post('/allLists', asyncHandler(async (req, res, next) => {
     }
   })
 
-  let listTasks = await db.Task.findAll({
-    where: {
-      user_id: {
-        [Op.eq]: userId
-      },
-      list_id: {
-        [Op.eq]: listId.id
+  let listTasks;
+  if (listId) {
+    listTasks = await db.Task.findAll({
+      where: {
+        user_id: {
+          [Op.eq]: userId
+        },
+        list_id: {
+          [Op.eq]: listId.id
+        }
       }
-    }
-  })
+    })
+  } else {
+    listTasks = await db.Task.findAll({
+      where: {
+        user_id: {
+          [Op.eq]: userId
+        }
+      }
+    })
+  }
 
   let allTasks = []
   listTasks.forEach(ele => {
@@ -41,16 +52,16 @@ router.post('/allLists', asyncHandler(async (req, res, next) => {
 }))
 
 router.post('/', asyncHandler(async (req, res, next) => {
-    const userId = await req.session.user.userId;
-    const name = req.body.input;
+  const userId = await req.session.user.userId;
+  const name = req.body.input;
 
-    await db.List.create({
-      name,
-      user_id: userId,
-      completed: false
-    });
+  await db.List.create({
+    name,
+    user_id: userId,
+    completed: false
+  });
 
-    res.json({ message: 'Success' })
+  res.json({ message: 'Success' })
 }))
 
 router.put('/', asyncHandler(async (req, res, next) => {

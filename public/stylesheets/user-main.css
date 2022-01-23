@@ -209,6 +209,10 @@ h1 {
     list-style: none;
 }
 
+.allTasks {
+  margin-bottom: 15px;
+}
+
 .firstP {
     background-color: white;
 }
