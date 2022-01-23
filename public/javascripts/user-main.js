@@ -390,7 +390,7 @@ taskButton.addEventListener('click', async (event) => {
 
     for (let i = taskDivs.length-1; i > 0; i--) {
       if (!taskDivs[i].hasChildNodes()) {
-        taskDivs[i].appendChild(taskListItem);
+        taskDivs[i].appendChild(newDivList);
       }
     }
 
