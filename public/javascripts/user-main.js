@@ -345,7 +345,7 @@ window.addEventListener("DOMContentLoaded", () => {
   let allTasks = Array.from(document.querySelectorAll('.tasks_summary > li'));
   allTasks.forEach(ele => {
     ele.innerHTML = `<div id='list-text' class='list-text'>${ele.innerHTML}</div><button class='task-edit'>edit</button><button class ='task-delete'>delete</button>`;
-    for (let i = taskDivs.length-1; i >= 0; i--) {
+    for (let i = taskDivs.length - 1; i >= 0; i--) {
       if (!taskDivs[i].hasChildNodes()) {
         taskDivs[i].appendChild(ele);
       }
@@ -365,6 +365,10 @@ window.addEventListener("DOMContentLoaded", () => {
         let modalAddP = document.querySelector('.firstP');
         modalAddP.innerHTML = 'Edit Task'
         modalAddButton.innerHTML = 'Edit Task';
+        if (modalAddP.innerHTML === 'Edit Task') {
+          let newTaskTitle = document.querySelector('.enter-task-name');
+          newTaskTitle.innerHTML = 'Please enter a new task:'
+        }
         modalAddButton.setAttribute('class', 'edit-task-button');
         modalAddButton.removeEventListener('click', listPost);
         modalAddButton.removeEventListener('click', listPut);
@@ -436,7 +440,7 @@ taskButton.addEventListener('click', async (event) => {
     newDivList.appendChild(newButtonDelete);
     taskUl.appendChild(newDivList);
 
-    for (let i = taskDivs.length-1; i > 0; i--) {
+    for (let i = taskDivs.length - 1; i >= 0; i--) {
       if (!taskDivs[i].hasChildNodes()) {
         taskDivs[i].appendChild(newDivList);
       }

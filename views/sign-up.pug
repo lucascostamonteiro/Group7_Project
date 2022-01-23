@@ -17,21 +17,21 @@ html
         form(action="/sign-up" method="post")
             div(class='sign-up-sentence') Sign up for free.
             input(type="hidden" name="_csrf" value=csrfToken)
-            input(class="input-box-error" type="text" name="firstName" placeholder='First Name')
+            input(class="input-box-error" type="text" name="firstName" value=firstName placeholder='First Name')
             div(class="error-msg")
               each error in errors
                 -if(error.includes("Please provide a value for First Name"))
                   p(class="error-text")= error
                 -if(error.includes("First Name must not be more than 50 characters long"))
                   p(class="error-text")= error
-            input(class="input-box-error" type="text" name="lastName" placeholder='Last Name')
+            input(class="input-box-error" type="text" name="lastName" value=lastName placeholder='Last Name')
             div(class="error-msg")
               each error in errors
                 -if(error.includes("Please provide a value for Last Name"))
                   p(class="error-text")= error
                 -if(error.includes("Last Name must not be more than 50 characters long"))
                   p(class="error-text")= error
-            input(class="input-box-error" type="text" name="email" placeholder="Email")
+            input(class="input-box-error" type="text" name="email" value=email placeholder="Email")
             div(class="error-msg")
               each error in errors
                 -if(error.includes("Please provide a value for Email address"))
