@@ -45,7 +45,7 @@ ul {
 
 .form-div {
   padding: 10px;
-  margin-left: -90px;
+  margin-left: -150px;
   display: flex;
   justify-content: end;
   align-items: center;
@@ -53,13 +53,13 @@ ul {
   height: auto;
 }
 
-
 form {
   margin-top: 110px;
   display: flex;
   flex-direction: column;
   padding: 10px;
   justify-content: center;
+  width: 50%;
 }
 
 form input {
