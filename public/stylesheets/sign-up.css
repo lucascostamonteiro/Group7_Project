@@ -50,10 +50,6 @@ ul {
   height: auto;
 }
 
-.errors-form-div {
-  width: 50%;
-
-}
 
 form {
   margin-top: 110px;
@@ -239,4 +235,10 @@ main {
   width: 100%;
   margin-top: 80px;
   background: #0060BF;
+}
+
+
+.error-text{
+  color: red;
+  font-weight: 450;
 }
