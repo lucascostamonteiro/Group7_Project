@@ -27,7 +27,7 @@ block content
   div(class="tasks-div")
     ul(class="tasks_summary")
       each task in tasksObj
-        li= task.task
+        li(class='task-list-item')= task.task
 
     div(class='add-task-div')
       p(class='task-p') Tasks

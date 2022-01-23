@@ -285,10 +285,19 @@ let taskPut = async (event) => {
 
 // TASKS
 
+const taskDivs = Array.from(document.querySelectorAll('.line'));
+
 window.addEventListener("DOMContentLoaded", () => {
   let allTasks = Array.from(document.querySelectorAll('.tasks_summary > li'));
   allTasks.forEach(ele => {
-    ele.innerHTML = `<div id='list-text' class='list-text'>${ele.innerHTML}</div><button class='task-edit'>edit</button><button class ='task-delete'>delete</button>`
+    console.log(ele)
+    ele.innerHTML = `<div id='list-text' class='list-text'>${ele.innerHTML}</div><button class='task-edit'>edit</button><button class ='task-delete'>delete</button>`;
+    for (let i = taskDivs.length-1; i > 0; i--) {
+      if (!taskDivs[i].hasChildNodes()) {
+        taskDivs[i].appendChild(ele);
+      }
+    }
+
   })
 
   let taskDelete = Array.from(document.querySelectorAll('.tasks_summary > li > .task-delete'));
@@ -359,6 +368,7 @@ taskButton.addEventListener('click', async (event) => {
   const data = await res.json();
   if (data.message === 'Success') {
 
+    const taskListItem = document.querySelector('.task-list-item');
     let taskUl = document.querySelector('.tasks_summary');
     const newDivList = document.createElement("li");
     const newDivText = document.createElement("div");
@@ -377,6 +387,13 @@ taskButton.addEventListener('click', async (event) => {
     newDivList.appendChild(newButtonEdit);
     newDivList.appendChild(newButtonDelete);
     taskUl.appendChild(newDivList);
+
+    for (let i = taskDivs.length-1; i > 0; i--) {
+      if (!taskDivs[i].hasChildNodes()) {
+        taskDivs[i].appendChild(taskListItem);
+      }
+    }
+
     newButtonEdit.addEventListener('click', taskPut); // TO DO
     newButtonDelete.addEventListener('click', taskDeleter); // TO DO
 
@@ -394,6 +411,5 @@ taskButton.addEventListener('click', async (event) => {
     newButtonDelete.style.backgroundColor = 'rgb(218, 67, 7)';
     newButtonDelete.style.border = 'solid rgb(218, 67, 7) 1px';
     newButtonDelete.style.borderRadius = '5px'
-
   }
 });
