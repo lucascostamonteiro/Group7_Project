@@ -15,10 +15,10 @@ block content
       span(class='close-button')
       div(class="modal-title")
         p(class='firstP') Add List
-        p(class='enter-list-name') Please enter a new list name:
+        p(class='enter-list-name enter-task-name') Please enter a new list name:
         form(action=`/lists` method='post' class='modal-form')
           input(type='hidden' name='_csrf' value=csrfToken)
-          input(type='text' class="input-list-name" placeHolder='List Name')
+          input(type='text' class="input-list-name" placeHolder='Type something...')
           div(class='modal-content-buttons')
             button(type='submit' class='add-list-button') Add List
             button(class='cancel-button') Cancel

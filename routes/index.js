@@ -148,13 +148,14 @@ router.post('/log-in', csrfProtection, loginValidators, asyncHandler(async (req,
   } else {
     errors = validatorErrors.array().map((error) => error.msg);
   }
-
-  res.render('log-in', {
-    title: 'Login',
-    email,
-    errors,
-    csrfToken: req.csrfToken(),
-  });
+  if (errors.length > 0) {
+    res.render('log-in', {
+      title: 'Login',
+      email,
+      errors,
+      csrfToken: req.csrfToken(),
+    });
+  }
 }));
 
 router.post('/demo', asyncHandler(async (req, res) => {
