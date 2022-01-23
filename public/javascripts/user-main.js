@@ -88,10 +88,12 @@ let listGet = async (event) => {
   });
   const data = await res.json();
 
-  let taskUl = document.querySelector('.tasks_summary');
-  while (taskUl.firstChild) {
-    taskUl.removeChild(taskUl.firstChild)
-  }
+  let taskUl = Array.from(document.querySelectorAll('.notepad-lines > div'));
+  taskUl.forEach(ele => {
+    if (ele.firstChild) {
+      ele.removeChild(ele.firstChild);
+    }
+  })
 
   data.tasks.forEach(ele => {
     const newDivList = document.createElement("li");
@@ -295,7 +297,6 @@ window.addEventListener("DOMContentLoaded", () => {
         taskDivs[i].appendChild(ele);
       }
     }
-
   })
 
   let taskDelete = Array.from(document.querySelectorAll('.notepad-lines > div > li > .task-delete'));
@@ -326,7 +327,6 @@ window.addEventListener("DOMContentLoaded", () => {
       toggleModal();
     })
   })
-
 });
 
 let taskDeleter = async (event) => {
