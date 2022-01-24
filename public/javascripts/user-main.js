@@ -266,6 +266,11 @@ let listPut = async (event) => {
       toggleModal();
     })
     newButtonDelete.addEventListener('click', listDeleter);
+    let listText = Array.from(document.querySelectorAll('.list_summary > li > div'));
+    listText.forEach(ele => {
+      ele.removeEventListener('click', listGet)
+      ele.addEventListener("click", listGet)
+    })
     listInput.value = '';
   }
 
@@ -350,6 +355,11 @@ let listPost = async (event) => {
       toggleModal();
     })
     newButtonDelete.addEventListener('click', listDeleter);
+    let listText = Array.from(document.querySelectorAll('.list_summary > li > div'));
+    listText.forEach(ele => {
+      ele.removeEventListener('click', listGet)
+      ele.addEventListener("click", listGet)
+    })
   }
   listInput.value = '';
 }
