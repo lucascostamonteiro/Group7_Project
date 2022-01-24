@@ -149,6 +149,7 @@ h1 {
 .list-text {
     display: inline-block;
     width: 150px;
+
 }
 
 .list-edit, .list-delete, .task-edit, .task-delete {
@@ -211,6 +212,8 @@ h1 {
 
 .allTasks {
   margin-bottom: 15px;
+  list-style: none;
+  width: fit-content;
 }
 
 .firstP {
@@ -261,4 +264,16 @@ h1 {
     padding: 10px;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.edit-task-button, .edit-list-button {
+    background-color: white;
+}
+
+.task-list-item {
+    list-style: none;
+}
+
+.list-name-container {
+    list-style: none;
 }
