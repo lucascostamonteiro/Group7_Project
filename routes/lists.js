@@ -68,6 +68,7 @@ router.put('/', asyncHandler(async (req, res, next) => {
   const userId = await req.session.user.userId;
   const name = req.body.input;
   const target = req.body.listInnerText;
+  console.log("DEBUG:", target)
 
   await db.List.destroy({
     where: {
@@ -85,6 +86,7 @@ router.put('/', asyncHandler(async (req, res, next) => {
 
   res.json({ message: 'Success' })
 }))
+
 
 router.delete('/', asyncHandler(async (req, res, next) => {
   const target = req.body.listInnerText;

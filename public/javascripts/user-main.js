@@ -447,8 +447,8 @@ taskButton.addEventListener('click', async (event) => {
       }
     }
 
-    newButtonEdit.addEventListener('click', taskPut); // TO DO
-    newButtonDelete.addEventListener('click', taskDeleter); // TO DO
+    newButtonEdit.addEventListener('click', taskPut);
+    newButtonDelete.addEventListener('click', taskDeleter); 
 
     newButtonEdit.style.padding = '5px';
     newButtonEdit.style.marginLeft = '5px';
