@@ -31,6 +31,13 @@ let listDeleter = async (event) => {
     let listUl = document.querySelector('.list_summary');
     listUl.removeChild(listInner.parentNode);
   }
+  let currentListNode = document.querySelector('.allTasks')
+  currentListNode.style.background = 'grey';
+  currentListNode.style.opacity = '.6';
+  currentListNode.style.padding = '5px';
+  currentListNode.style.borderRadius = '10px';
+  currentList = 'All Tasks';
+  listGet();
 }
 
 
@@ -95,20 +102,26 @@ let returnCurrentListNode = function (currentList) {
 
 let listGet = async (event) => {
 
-  let currentListNode = returnCurrentListNode(currentList);
-  currentListNode.style.background = null;
-  currentListNode.style.opacity = null;
-  currentListNode.style.padding = null;
-  currentListNode.style.borderRadius = null;
+  let listName;
 
-  let listName = event.target.innerText;
-  currentList = listName;
+  if (event) {
+    let currentListNode = returnCurrentListNode(currentList);
+    currentListNode.style.background = null;
+    currentListNode.style.opacity = null;
+    currentListNode.style.padding = null;
+    currentListNode.style.borderRadius = null;
 
-  currentListNode = returnCurrentListNode(currentList);
-  currentListNode.style.background = 'grey';
-  currentListNode.style.opacity = '.6';
-  currentListNode.style.padding = '5px';
-  currentListNode.style.borderRadius = '10px';
+    listName = event.target.innerText;
+    currentList = listName;
+
+    currentListNode = returnCurrentListNode(currentList);
+    currentListNode.style.background = 'grey';
+    currentListNode.style.opacity = '.6';
+    currentListNode.style.padding = '5px';
+    currentListNode.style.borderRadius = '10px';
+  } else {
+    listName = 'All Tasks';
+  }
 
   let res = await fetch('/lists/allLists', {
     method: "POST",
@@ -240,6 +253,14 @@ let listPut = async (event) => {
     newButtonEdit.addEventListener('click', listPut);
     newButtonDelete.addEventListener('click', listDeleter);
   }
+
+  let currentListNode = document.querySelector('.allTasks')
+  currentListNode.style.background = 'grey';
+  currentListNode.style.opacity = '.6';
+  currentListNode.style.padding = '5px';
+  currentListNode.style.borderRadius = '10px';
+  currentList = 'All Tasks';
+  listGet();
 }
 
 let listPost = async (event) => {
