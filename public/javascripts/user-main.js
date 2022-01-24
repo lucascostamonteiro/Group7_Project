@@ -157,6 +157,7 @@ let listGet = async (event) => {
     newDivList.appendChild(newButtonEdit);
     newDivList.appendChild(newButtonDelete);
 
+    newDivList.style.listStyle = 'none';
     newButtonEdit.style.padding = '5px';
     newButtonEdit.style.marginLeft = '5px';
     newButtonEdit.style.color = 'white';
@@ -469,8 +470,9 @@ taskButton.addEventListener('click', async (event) => {
     }
 
     newButtonEdit.addEventListener('click', taskPut);
-    newButtonDelete.addEventListener('click', taskDeleter); 
+    newButtonDelete.addEventListener('click', taskDeleter);
 
+    newDivList.style.listStyle = 'none';
     newButtonEdit.style.padding = '5px';
     newButtonEdit.style.marginLeft = '5px';
     newButtonEdit.style.color = 'white';
