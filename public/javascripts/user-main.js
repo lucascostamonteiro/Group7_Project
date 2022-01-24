@@ -266,6 +266,7 @@ let listPut = async (event) => {
       toggleModal();
     })
     newButtonDelete.addEventListener('click', listDeleter);
+    listInput.value = '';
   }
 
   let currentListNode = document.querySelector('.allTasks')
@@ -316,7 +317,7 @@ let listPost = async (event) => {
     newButtonDelete.style.backgroundColor = 'rgb(218, 67, 7)';
     newButtonDelete.style.border = 'solid rgb(218, 67, 7) 1px';
     newButtonDelete.style.borderRadius = '5px'
-    newButtonEdit.classList.add('list-delete');
+    newButtonDelete.classList.add('list-delete');
 
     const divTextText = document.createTextNode(input);
     newDivText.appendChild(divTextText);
@@ -350,6 +351,7 @@ let listPost = async (event) => {
     })
     newButtonDelete.addEventListener('click', listDeleter);
   }
+  listInput.value = '';
 }
 
 // submitListButton.addEventListener('click', listPost);
