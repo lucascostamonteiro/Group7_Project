@@ -222,14 +222,15 @@ let listPut = async (event) => {
   const data = await res.json();
   if (data.message === 'Success') {
     toggleModal();
-    let listUl = document.querySelector('.list_summary');
+    let listUlChildren = Array.from(document.querySelectorAll('.list_summary > li > div'));
     const newDivList = document.createElement("li");
     const newDivText = document.createElement("div");
     newDivText.setAttribute('id', 'list-text');
     newDivText.classList.add('list-text');
     const newButtonEdit = document.createElement("button");
-    newButtonEdit.classList.add('list-text');
+    newButtonEdit.classList.add('list-edit');
     const newButtonDelete = document.createElement("button");
+    newButtonDelete.classList.add('list-delete');
     const divTextText = document.createTextNode(input);
     newDivText.appendChild(divTextText);
     const divButtonEdit = document.createTextNode('edit');
@@ -239,15 +240,10 @@ let listPut = async (event) => {
     newDivList.appendChild(newDivText);
     newDivList.appendChild(newButtonEdit);
     newDivList.appendChild(newButtonDelete);
-    listUl.appendChild(newDivList);
-    let listArray = Array.from(listUl);
-    let nodeToReplace = newDivList;
-    listArray.forEach(ele => {
-      if (ele.innerText === input) {
-        nodeToReplace = ele;
-        listUl.replaceChild(newDivList, nodeToReplace);
-      } else {
-        listUl.replaceChildren(newDivList, listInner);
+    newDivList.classList.add('list-listItem')
+    listUlChildren.forEach(ele => {
+      if (ele.innerText === listInnerText) {
+        ele.parentNode.parentNode.replaceChild(newDivList, ele.parentNode);
       }
     })
     newButtonEdit.addEventListener('click', listPut);
