@@ -8,7 +8,7 @@ Contributors: Jacob Richardson, Karl Felter, Loren Santos, Lucas Monteiro
 
 
 ## Architecture
-Getaway is built on a React frontend with a Flask backend, using PostgreSQL as a database.
+Remember The Bread is built on a React frontend with an Express backend, using PostgreSQL as a database.
 
 ## Technologies Used
 - React
@@ -49,4 +49,4 @@ Getaway is built on a React frontend with a Flask backend, using PostgreSQL as a
 9. Start the services for the frontend from the frontend directory. Upon start of services the project should open in your default browser or you can navigate to http://localhost:3000
    * `npm start`
 
-Use the demo user account or create your own account to start using Estádium.
+Use the demo user account or create your own account to start using Remember The Bread.
