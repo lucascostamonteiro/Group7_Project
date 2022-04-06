@@ -20,6 +20,8 @@ Getaway is built on a React frontend with a Flask backend, using PostgreSQL as a
 - Sequelize
 - PostgreSQL
 
+## Setup Remember the Bread
+
 1. Clone the repo
   *  `git clone https://github.com/lucascostamonteiro/RememberTheBread`
 
